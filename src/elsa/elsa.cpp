@@ -14,10 +14,13 @@
 
 using namespace elsa;
 
-void setup_entities(entities::EntityManager& em)
+void setup_entities(entities::EntityManager& em, rendering::Renderer* renderer)
 {
     auto player = em.create_entity();
-    player->add_component<components::RenderableComponent>();
+
+    auto t = rendering::Texture::load_from_bmp("assets/dude.bmp", renderer);
+    player->add_component<components::RenderableComponent>(renderer, std::move(t));
+
     player->add_component<components::InputComponent>();
 }
 
@@ -31,19 +34,16 @@ int main(int argc, char* args[])
 
     try
     {
-        auto em = entities::EntityManager();
-        setup_entities(em);
-
         auto w = rendering::Window::create("Elsa!", 800, 600);
         auto r = rendering::Renderer::create(w.get());
-        auto t = rendering::Texture::load_from_bmp("assets/dude.bmp", r.get());
+
+        auto em = entities::EntityManager();
+        setup_entities(em, r.get());
 
         r->clear();
 
-        r->render_texture(t.get());
-
-        r->set_draw_color(rendering::Color::create(0, 0, 255));
-        r->fill_rect(100, 100, 100, 100);
+        em.update(0.016f);
+        em.render();
 
         r->present();
 

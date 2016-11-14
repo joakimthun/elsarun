@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <vector>
 #include <memory>
 #include <bitset>
 
@@ -58,23 +59,26 @@ namespace elsa {
                 c->entity = this;
                 c->init();
 
+                added_components_.push_back(c.get());
+
                 components_[get_component_type_id<TComponent>()] = std::move(c);
                 component_flags_[get_component_type_id<TComponent>()] = true;
             }
 
             inline void update(float dt)
             {
-                for (auto& c : components_) c->update(dt);
+                for (auto c : added_components_) c->update(dt);
             };
 
             inline void render()
             {
-                for (auto& c : components_) c->render();
+                for (auto c : added_components_) c->render();
             };
 
         private:
             std::bitset<NumComponents> component_flags_;
             std::array<std::unique_ptr<components::Component>, NumComponents> components_;
+            std::vector<components::Component*> added_components_;
         };
     }
 }

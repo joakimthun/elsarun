@@ -1,21 +1,27 @@
 #pragma once
 
+#include <memory>
+
 #include "component.h"
+#include "../rendering/texture.h"
 
 namespace elsa {
+
+    namespace rendering {
+        class Renderer;
+    }
+
     namespace components {
 
-        struct RenderableComponent : Component
+        class RenderableComponent : public Component
         {
-            void update(float dt) override
-            {
+        public:
+            RenderableComponent(rendering::Renderer* renderer, std::unique_ptr<rendering::Texture> texture);
+            void render() override;
 
-            };
-
-            void render() override
-            {
-
-            };
+        private:
+            rendering::Renderer* renderer_;
+            std::unique_ptr<rendering::Texture> texture_;
         };
 
     }
