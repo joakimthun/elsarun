@@ -9,29 +9,23 @@
 namespace elsa {
     namespace entities {
 
-        EntityManager::EntityManager()
+        EntityManager::EntityManager() {}
+        EntityManager::~EntityManager() {}
+
+        Entity* EntityManager::create_entity()
         {
-            auto e = new entities::Entity();
-            
+            entities_.push_back(std::make_unique<Entity>());
+            return entities_.back().get();
+        }
 
-            std::cout << "get_component_type_id InputComponent:" << entities::get_component_type_id<components::InputComponent>() << std::endl;
-            std::cout << "get_component_type_id InputComponent:" << entities::get_component_type_id<components::InputComponent>() << std::endl;
-            std::cout << "get_component_type_id RenderableComponent:" << entities::get_component_type_id<components::RenderableComponent>() << std::endl;
-            std::cout << "get_component_type_id InputComponent:" << entities::get_component_type_id<components::InputComponent>() << std::endl;
+        void EntityManager::update(float dt)
+        {
+            for (auto& c : entities_) c->update(dt);
+        }
 
-            std::cout << "has_component InputComponent:" << (e->has_component<components::InputComponent>() ? "true" : "false") << std::endl;
-
-            e->add_component<components::InputComponent>();
-
-            std::cout << "has_component InputComponent:" << (e->has_component<components::InputComponent>() ? "true" : "false") << std::endl;
-
-
-            std::cout << "has_component RenderableComponent:" << (e->has_component<components::RenderableComponent>() ? "true" : "false") << std::endl;
-
-            e->add_component<components::RenderableComponent>();
-
-            std::cout << "has_component RenderableComponent:" << (e->has_component<components::RenderableComponent>() ? "true" : "false") << std::endl;
-
+        void EntityManager::render()
+        {
+            for (auto& c : entities_) c->render();
         }
     }
 }

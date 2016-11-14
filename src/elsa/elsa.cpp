@@ -14,6 +14,13 @@
 
 using namespace elsa;
 
+void setup_entities(entities::EntityManager& em)
+{
+    auto player = em.create_entity();
+    player->add_component<components::RenderableComponent>();
+    player->add_component<components::InputComponent>();
+}
+
 int main(int argc, char* args[])
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -24,30 +31,8 @@ int main(int argc, char* args[])
 
     try
     {
-        auto em = new entities::EntityManager();
-
-        std::cout << "else.cpp get_component_type_id InputComponent:" << entities::get_component_type_id<components::InputComponent>() << std::endl;
-        std::cout << "else.cpp get_component_type_id RenderableComponent:" << entities::get_component_type_id<components::RenderableComponent>() << std::endl;
-        std::cout << "else.cpp get_component_type_id InputComponent:" << entities::get_component_type_id<components::InputComponent>() << std::endl;
-        std::cout << "else.cpp get_component_type_id InputComponent:" << entities::get_component_type_id<components::InputComponent>() << std::endl;
-
-        auto e = new entities::Entity();
-        std::cout << "has_component InputComponent:" << (e->has_component<components::InputComponent>() ? "true" : "false") <<  std::endl;
-
-        auto c = e->get_component<components::InputComponent>();
-
-        e->add_component<components::InputComponent>();
-
-        std::cout << "has_component InputComponent:" << (e->has_component<components::InputComponent>() ? "true" : "false") << std::endl;
-
-        c = e->get_component<components::InputComponent>();
-        c->update(0.0f);
-
-        std::cout << "has_component RenderableComponent:" << (e->has_component<components::RenderableComponent>() ? "true" : "false") << std::endl;
-
-        e->add_component<components::RenderableComponent>();
-
-        std::cout << "has_component RenderableComponent:" << (e->has_component<components::RenderableComponent>() ? "true" : "false") << std::endl;
+        auto em = entities::EntityManager();
+        setup_entities(em);
 
         auto w = rendering::Window::create("Elsa!", 800, 600);
         auto r = rendering::Renderer::create(w.get());

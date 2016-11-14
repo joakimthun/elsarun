@@ -51,7 +51,7 @@ namespace elsa {
             }
 
             template <typename TComponent, typename... TArgs>
-            void add_component(TArgs&&... args)
+            inline void add_component(TArgs&&... args)
             {
                 auto c = std::make_unique<TComponent>(std::forward<TArgs>(args)...);
 
@@ -62,6 +62,15 @@ namespace elsa {
                 component_flags_[get_component_type_id<TComponent>()] = true;
             }
 
+            inline void update(float dt)
+            {
+                for (auto& c : components_) c->update(dt);
+            };
+
+            inline void render()
+            {
+                for (auto& c : components_) c->render();
+            };
 
         private:
             std::bitset<NumComponents> component_flags_;
