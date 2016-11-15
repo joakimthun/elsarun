@@ -17,9 +17,14 @@
 
 using namespace elsa;
 
+auto const SCREEN_WIDTH = 800;
+auto const SCREEN_HEIGHT = 600;
+
 void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer)
 {
     auto player = em.create_entity();
+    player->transform.position.x = SCREEN_WIDTH / 2;
+    player->transform.position.y = SCREEN_HEIGHT / 2;
 
     auto t = rendering::Texture::load_from_bmp("assets/dude.bmp", renderer);
     player->add_component<components::RenderableComponent>(renderer, std::move(t));
@@ -37,7 +42,7 @@ int main(int argc, char* args[])
 
     try
     {
-        auto w = rendering::Window::create("Elsa!", 800, 600);
+        auto w = rendering::Window::create("Elsa!", SCREEN_WIDTH, SCREEN_HEIGHT);
         auto r = rendering::Renderer2D::create(w.get(), false);
 
         auto em = entities::EntityManager();
@@ -59,7 +64,10 @@ int main(int argc, char* args[])
         while (running)
         {
             input::InputManager::handle_input(dt);
+
+            r->set_draw_color(rendering::Color::create(0, 0, 0));
             r->clear();
+
             em.frame(dt);
             r->present();
 

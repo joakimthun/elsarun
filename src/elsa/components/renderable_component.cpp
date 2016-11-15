@@ -5,6 +5,7 @@
 #include "../typedef.h"
 #include "../entities/entity.h"
 #include "../rendering/renderer2d.h"
+#include "../rendering/color.h"
 
 namespace elsa {
     namespace components {
@@ -19,7 +20,9 @@ namespace elsa {
         void RenderableComponent::render()
         {
             const auto position = entity->transform.position;
-            renderer_->render_texture(texture_.get(), static_cast<i32>(position.x), static_cast<i32>(position.y));
+            //renderer_->render_texture(texture_.get(), static_cast<i32>(position.x), static_cast<i32>(position.y));
+
+            renderer_->set_draw_color(rendering::Color::create(255, 0, 0));
         }
     }
 }
