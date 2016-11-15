@@ -4,12 +4,10 @@
 #include "../input/input_manager.h"
 #include "physics_component.h"
 
-#include <iostream>
-
 namespace elsa {
     namespace components {
 
-        const float VELOCITY_FACTOR = 10;
+        const float VELOCITY = 100;
 
         void InputComponent::init()
         {
@@ -28,7 +26,7 @@ namespace elsa {
 
         void InputComponent::handle_left_down_event(float dt)
         {
-            physics_component_->velocity.x -= VELOCITY_FACTOR * dt;
+            physics_component_->velocity.x = -VELOCITY;
         }
 
         void InputComponent::handle_right_up_event(float dt)
@@ -38,7 +36,7 @@ namespace elsa {
 
         void InputComponent::handle_right_down_event(float dt)
         {
-            physics_component_->velocity.x += VELOCITY_FACTOR * dt;
+            physics_component_->velocity.x = VELOCITY;
         }
     }
 }

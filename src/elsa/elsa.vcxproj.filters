@@ -45,6 +45,9 @@
     <ClCompile Include="components\input_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="components\physics_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">

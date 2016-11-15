@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <memory>
 
+#include "../typedef.h"
+
 namespace elsa {
     namespace rendering {
 
@@ -17,6 +19,8 @@ namespace elsa {
 
             static std::unique_ptr<Texture> load_from_bmp(const char* path, const Renderer2D* renderer);
 
+            i32 width = 0;
+            i32 height = 0;
         private:
             SDL_Texture* texture_;
         };

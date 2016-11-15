@@ -25,6 +25,7 @@ namespace elsa {
             void clear();
             void present();
             void render_texture(const Texture* texture);
+            void render_texture(const Texture* texture, i32 x, i32 y);
             void fill_rect(i32 x, i32 y, i32 width, i32 height);
 
         private:

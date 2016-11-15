@@ -31,6 +31,11 @@ namespace elsa {
                 throw errors::ElsaException(SDL_GetError());
             }
 
+            if (SDL_QueryTexture(texture->texture_, nullptr, nullptr, &texture->width, &texture->height) != 0)
+            {
+                throw errors::ElsaException(SDL_GetError());
+            }
+
             return texture;
         }
 

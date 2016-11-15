@@ -2,6 +2,8 @@
 
 #include "renderable_component.h"
 
+#include "../typedef.h"
+#include "../entities/entity.h"
 #include "../rendering/renderer2d.h"
 
 namespace elsa {
@@ -16,7 +18,8 @@ namespace elsa {
 
         void RenderableComponent::render()
         {
-            renderer_->render_texture(texture_.get());
+            const auto position = entity->transform.position;
+            renderer_->render_texture(texture_.get(), static_cast<i32>(position.x), static_cast<i32>(position.y));
         }
     }
 }
