@@ -56,8 +56,7 @@ int main(int argc, char* args[])
 
             r->clear();
 
-            em.update(0.016f);
-            em.render();
+            em.frame(0.016f);
 
             r->present();
         }

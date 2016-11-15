@@ -15,9 +15,7 @@ namespace elsa {
             ~EntityManager();
 
             Entity* create_entity();
-            void update(float dt);
-            void render();
-
+            void frame(float dt);
         private:
             std::vector<std::unique_ptr<Entity>> entities_;
         };

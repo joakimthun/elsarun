@@ -18,14 +18,12 @@ namespace elsa {
             return entities_.back().get();
         }
 
-        void EntityManager::update(float dt)
+        void EntityManager::frame(float dt)
         {
-            for (auto& c : entities_) c->update(dt);
-        }
-
-        void EntityManager::render()
-        {
-            for (auto& c : entities_) c->render();
+            for (auto& c : entities_)
+            {
+                c->frame(dt);
+            }
         }
     }
 }

@@ -66,14 +66,13 @@ namespace elsa {
                 component_flags_[get_component_type_id<TComponent>()] = true;
             }
 
-            inline void update(float dt)
+            inline void frame(float dt)
             {
-                for (auto c : added_components_) c->update(dt);
-            };
-
-            inline void render()
-            {
-                for (auto c : added_components_) c->render();
+                for (auto c : added_components_)
+                {
+                    c->update(dt);
+                    c->render();
+                }
             };
 
             components::TransformComponent transform;
