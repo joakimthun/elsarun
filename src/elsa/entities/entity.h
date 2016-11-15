@@ -6,6 +6,7 @@
 #include <bitset>
 
 #include "../components/component.h"
+#include "../components/transform_component.h"
 
 namespace elsa {
     namespace entities {
@@ -75,6 +76,8 @@ namespace elsa {
                 for (auto c : added_components_) c->render();
             };
 
+
+            components::TransformComponent transform;
         private:
             std::bitset<NumComponents> component_flags_;
             std::array<std::unique_ptr<components::Component>, NumComponents> components_;

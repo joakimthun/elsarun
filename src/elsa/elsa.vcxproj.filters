@@ -77,5 +77,8 @@
     <ClInclude Include="rendering\renderer2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="components\transform_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
