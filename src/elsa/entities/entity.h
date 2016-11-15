@@ -76,7 +76,6 @@ namespace elsa {
                 for (auto c : added_components_) c->render();
             };
 
-
             components::TransformComponent transform;
         private:
             std::bitset<NumComponents> component_flags_;

@@ -40,14 +40,27 @@ int main(int argc, char* args[])
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
 
-        r->clear();
 
-        em.update(0.016f);
-        em.render();
+        auto running = true;
+        SDL_Event e;
 
-        r->present();
+        while (running)
+        {
+            while (SDL_PollEvent(&e) != 0)
+            {
+                if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    running = false;
+                }
+            }
 
-        SDL_Delay(1500);
+            r->clear();
+
+            em.update(0.016f);
+            em.render();
+
+            r->present();
+        }
     }
     catch (const errors::ElsaException& ex)
     {
