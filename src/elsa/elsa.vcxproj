@@ -162,6 +162,7 @@
     <ClCompile Include="entities\entity_manager.cpp" />
     <ClCompile Include="elsa.cpp" />
     <ClCompile Include="errors\elsa_exception.cpp" />
+    <ClCompile Include="input\input_manager.cpp" />
     <ClCompile Include="math\vector2D.cpp" />
     <ClCompile Include="rendering\renderer2d.cpp" />
     <ClCompile Include="rendering\texture.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="entities\entity_manager.h" />
     <ClInclude Include="entities\entity.h" />
     <ClInclude Include="errors\elsa_exception.h" />
+    <ClInclude Include="input\input_manager.h" />
     <ClInclude Include="math\vector2D.h" />
     <ClInclude Include="rendering\color.h" />
     <ClInclude Include="rendering\renderer2d.h" />

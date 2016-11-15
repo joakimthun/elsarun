@@ -39,6 +39,9 @@
     <ClCompile Include="rendering\renderer2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="input\input_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="components\transform_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

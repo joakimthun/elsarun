@@ -7,6 +7,7 @@
 #include "rendering/texture.h"
 #include "rendering/color.h"
 
+#include "input/input_manager.h"
 #include "entities/entity.h"
 #include "entities/entity_manager.h"
 #include "components/input_component.h"
@@ -40,24 +41,17 @@ int main(int argc, char* args[])
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
 
-
         auto running = true;
-        SDL_Event e;
+        input::InputManager::register_callback(input::InputEvent::Quit, [&running]() 
+        {
+            running = false;
+        });
 
         while (running)
         {
-            while (SDL_PollEvent(&e) != 0)
-            {
-                if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
-                {
-                    running = false;
-                }
-            }
-
+            input::InputManager::handle_input();
             r->clear();
-
             em.frame(0.016f);
-
             r->present();
         }
     }
