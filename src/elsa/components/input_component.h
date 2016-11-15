@@ -1,5 +1,8 @@
 #pragma once
 
+#include <array>
+
+#include "../typedef.h"
 #include "component.h"
 
 namespace elsa {
@@ -7,20 +10,32 @@ namespace elsa {
 
         struct PhysicsComponent;
 
+        enum class Key : u16
+        {
+            Left,
+            Right,
+            Up,
+            Down,
+            MAX_VALUE
+        };
+
+        inline static std::size_t constexpr max_num_keys()
+        {
+            return static_cast<std::size_t>(Key::MAX_VALUE);
+        }
+
         struct InputComponent : Component
         {
             void init() override;
+            void update(float dt) override;
+
         private:
-            void handle_left_up_event();
-            void handle_left_down_event();
-            void handle_right_up_event();
-            void handle_right_down_event();
-            void handle_up_up_event();
-            void handle_up_down_event();
-            void handle_down_up_event();
-            void handle_down_down_event();
+            void set_state_down(Key k);
+            void set_state_up(Key k);
+            bool is_down(Key k);
 
             PhysicsComponent* physics_component_ = nullptr;
+            std::array<bool, max_num_keys()> key_states_ = { false };
         };
 
     }

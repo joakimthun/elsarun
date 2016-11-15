@@ -7,8 +7,7 @@
 namespace elsa {
     namespace input {
 
-        auto constexpr MAX_NUM_EVENTS = static_cast<std::size_t>(InputEvent::MAX_VALUE);
-        static std::array<std::vector<std::function<void()>>, MAX_NUM_EVENTS> callbacks;
+        static std::array<std::vector<std::function<void()>>, InputManager::max_num_events()> callbacks;
 
         void InputManager::handle_input()
         {

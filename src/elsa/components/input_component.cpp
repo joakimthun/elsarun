@@ -1,7 +1,7 @@
 #include "input_component.h"
 
-#include "../entities/entity.h"
 #include "../input/input_manager.h"
+#include "../entities/entity.h"
 #include "physics_component.h"
 
 namespace elsa {
@@ -13,55 +13,59 @@ namespace elsa {
         {
             physics_component_ = entity->get_component<PhysicsComponent>();
 
-            input::InputManager::register_callback(input::InputEvent::Left_Up, std::bind(&InputComponent::handle_left_up_event, this));
-            input::InputManager::register_callback(input::InputEvent::Left_Down, std::bind(&InputComponent::handle_left_down_event, this));
-            input::InputManager::register_callback(input::InputEvent::Right_Up, std::bind(&InputComponent::handle_right_up_event, this));
-            input::InputManager::register_callback(input::InputEvent::Right_Down, std::bind(&InputComponent::handle_right_down_event, this));
-
-            input::InputManager::register_callback(input::InputEvent::Up_Up, std::bind(&InputComponent::handle_up_up_event, this));
-            input::InputManager::register_callback(input::InputEvent::Up_Down, std::bind(&InputComponent::handle_up_down_event, this));
-            input::InputManager::register_callback(input::InputEvent::Down_Up, std::bind(&InputComponent::handle_down_up_event, this));
-            input::InputManager::register_callback(input::InputEvent::Down_Down, std::bind(&InputComponent::handle_down_down_event, this));
+            input::InputManager::register_callback(input::InputEvent::Left_Up, [this]() { set_state_up(Key::Left); });
+            input::InputManager::register_callback(input::InputEvent::Left_Down, [this]() { set_state_down(Key::Left); });
+            input::InputManager::register_callback(input::InputEvent::Right_Up, [this]() { set_state_up(Key::Right); });
+            input::InputManager::register_callback(input::InputEvent::Right_Down, [this]() { set_state_down(Key::Right); });
+            
+            input::InputManager::register_callback(input::InputEvent::Up_Up, [this]() { set_state_up(Key::Up); });
+            input::InputManager::register_callback(input::InputEvent::Up_Down, [this]() { set_state_down(Key::Up); });
+            input::InputManager::register_callback(input::InputEvent::Down_Up, [this]() { set_state_up(Key::Down); });
+            input::InputManager::register_callback(input::InputEvent::Down_Down, [this]() { set_state_down(Key::Down); });
         }
 
-        void InputComponent::handle_left_up_event()
+        void InputComponent::update(float dt)
         {
-            physics_component_->velocity.x = 0;
+            if (is_down(Key::Up))
+            {
+                physics_component_->velocity.y = -VELOCITY;
+            }
+            else if (is_down(Key::Down))
+            {
+                physics_component_->velocity.y = VELOCITY;
+            }
+            else
+            {
+                physics_component_->velocity.y = 0;
+            }
+
+            if (is_down(Key::Left))
+            {
+                physics_component_->velocity.x = -VELOCITY;
+            }
+            else if (is_down(Key::Right))
+            {
+                physics_component_->velocity.x = VELOCITY;
+            }
+            else
+            {
+                physics_component_->velocity.x = 0;
+            }
         }
 
-        void InputComponent::handle_left_down_event()
+        void InputComponent::set_state_down(Key k)
         {
-            physics_component_->velocity.x = -VELOCITY;
+            key_states_[static_cast<std::size_t>(k)] = true;
         }
 
-        void InputComponent::handle_right_up_event()
+        void InputComponent::set_state_up(Key k)
         {
-            physics_component_->velocity.x = 0;
+            key_states_[static_cast<std::size_t>(k)] = false;
         }
 
-        void InputComponent::handle_right_down_event()
+        bool InputComponent::is_down(Key k)
         {
-            physics_component_->velocity.x = VELOCITY;
-        }
-
-        void InputComponent::handle_up_up_event()
-        {
-            physics_component_->velocity.y = 0;
-        }
-
-        void InputComponent::handle_up_down_event()
-        {
-            physics_component_->velocity.y = -VELOCITY;
-        }
-
-        void InputComponent::handle_down_up_event()
-        {
-            physics_component_->velocity.y = 0;
-        }
-
-        void InputComponent::handle_down_down_event()
-        {
-            physics_component_->velocity.y = VELOCITY;
+            return key_states_[static_cast<std::size_t>(k)];
         }
     }
 }
