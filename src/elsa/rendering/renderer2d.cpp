@@ -14,11 +14,18 @@ namespace elsa {
             SDL_DestroyRenderer(renderer_);
         }
 
-        std::unique_ptr<Renderer2D> Renderer2D::create(const Window* window)
+        std::unique_ptr<Renderer2D> Renderer2D::create(const Window* window, bool vsync)
         {
             auto renderer = std::make_unique<Renderer2D>();
 
-            renderer->renderer_ = SDL_CreateRenderer(window->window_, -1, SDL_RENDERER_ACCELERATED);
+            u32 flags = SDL_RENDERER_ACCELERATED;
+
+            if (vsync)
+            {
+                flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
+            }
+
+            renderer->renderer_ = SDL_CreateRenderer(window->window_, -1, flags);
             if (renderer->renderer_ == nullptr)
             {
                 throw errors::ElsaException(SDL_GetError());

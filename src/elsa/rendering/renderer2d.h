@@ -20,7 +20,7 @@ namespace elsa {
             Renderer2D();
             ~Renderer2D();
             
-            static std::unique_ptr<Renderer2D> create(const Window* window);
+            static std::unique_ptr<Renderer2D> create(const Window* window, bool vsync);
             void set_draw_color(Color color);
             void clear();
             void present();

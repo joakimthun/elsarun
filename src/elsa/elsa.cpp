@@ -6,6 +6,7 @@
 #include "rendering/renderer2d.h"
 #include "rendering/texture.h"
 #include "rendering/color.h"
+#include "timing/timer.h"
 
 #include "input/input_manager.h"
 #include "entities/entity.h"
@@ -37,12 +38,14 @@ int main(int argc, char* args[])
     try
     {
         auto w = rendering::Window::create("Elsa!", 800, 600);
-        auto r = rendering::Renderer2D::create(w.get());
+        auto r = rendering::Renderer2D::create(w.get(), false);
 
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
         em.init();
 
+        auto timer = timing::Timer();
+        const auto max_dt = 0.032f;
         auto dt = 0.016f;
         auto running = true;
         input::InputManager::register_callback(input::InputEvent::Quit, [&running](float dt)
@@ -50,12 +53,28 @@ int main(int argc, char* args[])
             running = false;
         });
 
+        timer.start();
+        auto num_frames = 0;
+
         while (running)
         {
             input::InputManager::handle_input(dt);
             r->clear();
             em.frame(dt);
             r->present();
+
+            dt = (timer.get_ticks_since_last_call() / 1000.f);
+            if (dt > max_dt)
+            {
+                dt = max_dt;
+            }
+
+            if (num_frames % 10 == 0)
+            {
+                std::cout << "dt: " << dt << std::endl;
+            }
+
+            num_frames++;
         }
     }
     catch (const errors::ElsaException& ex)
