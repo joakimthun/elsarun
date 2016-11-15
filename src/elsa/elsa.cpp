@@ -3,7 +3,7 @@
 
 #include "errors/elsa_exception.h"
 #include "rendering/window.h"
-#include "rendering/renderer.h"
+#include "rendering/renderer2d.h"
 #include "rendering/texture.h"
 #include "rendering/color.h"
 
@@ -14,7 +14,7 @@
 
 using namespace elsa;
 
-void setup_entities(entities::EntityManager& em, rendering::Renderer* renderer)
+void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer)
 {
     auto player = em.create_entity();
 
@@ -35,7 +35,7 @@ int main(int argc, char* args[])
     try
     {
         auto w = rendering::Window::create("Elsa!", 800, 600);
-        auto r = rendering::Renderer::create(w.get());
+        auto r = rendering::Renderer2D::create(w.get());
 
         auto em = entities::EntityManager();
         setup_entities(em, r.get());

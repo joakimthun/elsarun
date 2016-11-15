@@ -13,14 +13,14 @@ namespace elsa {
         class Texture;
         struct Color;
 
-        class Renderer
+        class Renderer2D
         {
             friend class Texture;
         public:
-            Renderer();
-            ~Renderer();
+            Renderer2D();
+            ~Renderer2D();
             
-            static std::unique_ptr<Renderer> create(const Window* window);
+            static std::unique_ptr<Renderer2D> create(const Window* window);
             void set_draw_color(Color color);
             void clear();
             void present();

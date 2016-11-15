@@ -163,7 +163,7 @@
     <ClCompile Include="elsa.cpp" />
     <ClCompile Include="errors\elsa_exception.cpp" />
     <ClCompile Include="math\vector2D.cpp" />
-    <ClCompile Include="rendering\renderer.cpp" />
+    <ClCompile Include="rendering\renderer2d.cpp" />
     <ClCompile Include="rendering\texture.cpp" />
     <ClCompile Include="rendering\window.cpp" />
   </ItemGroup>
@@ -176,7 +176,7 @@
     <ClInclude Include="errors\elsa_exception.h" />
     <ClInclude Include="math\vector2D.h" />
     <ClInclude Include="rendering\color.h" />
-    <ClInclude Include="rendering\renderer.h" />
+    <ClInclude Include="rendering\renderer2d.h" />
     <ClInclude Include="rendering\texture.h" />
     <ClInclude Include="typedef.h" />
     <ClInclude Include="rendering\window.h" />

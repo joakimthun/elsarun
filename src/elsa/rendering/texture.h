@@ -6,16 +6,16 @@
 namespace elsa {
     namespace rendering {
 
-        class Renderer;
+        class Renderer2D;
 
         class Texture
         {
-            friend class Renderer;
+            friend class Renderer2D;
         public:
             Texture();
             ~Texture();
 
-            static std::unique_ptr<Texture> load_from_bmp(const char* path, const Renderer* renderer);
+            static std::unique_ptr<Texture> load_from_bmp(const char* path, const Renderer2D* renderer);
 
         private:
             SDL_Texture* texture_;

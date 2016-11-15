@@ -9,11 +9,11 @@
 namespace elsa {
     namespace rendering {
 
-        class Renderer;
+        class Renderer2D;
 
         class Window
         {
-            friend class Renderer;
+            friend class Renderer2D;
         public:
             Window();
             ~Window();

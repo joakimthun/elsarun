@@ -1,6 +1,6 @@
 #include "texture.h"
 
-#include "renderer.h"
+#include "renderer2d.h"
 #include "../errors/elsa_exception.h"
 
 namespace elsa {
@@ -13,7 +13,7 @@ namespace elsa {
             SDL_DestroyTexture(texture_);
         }
 
-        std::unique_ptr<Texture> Texture::load_from_bmp(const char* path, const Renderer* renderer)
+        std::unique_ptr<Texture> Texture::load_from_bmp(const char* path, const Renderer2D* renderer)
         {
             auto texture = std::make_unique<Texture>();
             auto surface = SDL_LoadBMP(path);

@@ -24,9 +24,6 @@
     <ClCompile Include="errors\elsa_exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="rendering\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,15 +36,15 @@
     <ClCompile Include="components\renderable_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\renderer2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="errors\elsa_exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rendering\window.h">
@@ -75,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="components\renderable_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\renderer2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,7 +8,7 @@
 namespace elsa {
 
     namespace rendering {
-        class Renderer;
+        class Renderer2D;
     }
 
     namespace components {
@@ -16,11 +16,11 @@ namespace elsa {
         class RenderableComponent : public Component
         {
         public:
-            RenderableComponent(rendering::Renderer* renderer, std::unique_ptr<rendering::Texture> texture);
+            RenderableComponent(rendering::Renderer2D* renderer, std::unique_ptr<rendering::Texture> texture);
             void render() override;
 
         private:
-            rendering::Renderer* renderer_;
+            rendering::Renderer2D* renderer_;
             std::unique_ptr<rendering::Texture> texture_;
         };
 
