@@ -41,17 +41,18 @@ int main(int argc, char* args[])
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
 
+        auto dt = 0.016f;
         auto running = true;
-        input::InputManager::register_callback(input::InputEvent::Quit, [&running]() 
+        input::InputManager::register_callback(input::InputEvent::Quit, [&running](float dt)
         {
             running = false;
         });
 
         while (running)
         {
-            input::InputManager::handle_input();
+            input::InputManager::handle_input(dt);
             r->clear();
-            em.frame(0.016f);
+            em.frame(dt);
             r->present();
         }
     }

@@ -10,21 +10,22 @@ namespace elsa {
         enum class InputEvent : u16
         {
             Quit,
-            Left,
-            Right
+            Left_Up,
+            Left_Down,
+            Right_Up,
+            Right_Down,
+            MAX_VALUE
         };
-
-        //auto constexpr MAX_NUM_EVENTS = static_cast<std::size_t>(std::numeric_limits<InputEvent>::max());
 
         class InputManager
         {
         public:
-            static void handle_input();
-            static void register_callback(InputEvent e, std::function<void()> callback);
+            static void handle_input(float dt);
+            static void register_callback(InputEvent e, std::function<void(float)> callback);
 
         private:
             InputManager() = delete;
-            static void raise_event(InputEvent e);
+            static void raise_event(InputEvent e, float dt);
         };
     }
 }

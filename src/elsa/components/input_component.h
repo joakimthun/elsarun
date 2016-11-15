@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "component.h"
 
 namespace elsa {
@@ -9,10 +7,12 @@ namespace elsa {
 
         struct InputComponent : Component
         {
-            void update(float dt) override
-            {
-                std::cout << "InputComponent -> update" << std::endl;
-            };
+            void init() override;
+        private:
+            void handle_left_up_event(float dt);
+            void handle_left_down_event(float dt);
+            void handle_right_up_event(float dt);
+            void handle_right_down_event(float dt);
         };
 
     }

@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="components\input_component.cpp" />
     <ClCompile Include="components\renderable_component.cpp" />
     <ClCompile Include="entities\entity_manager.cpp" />
     <ClCompile Include="elsa.cpp" />
