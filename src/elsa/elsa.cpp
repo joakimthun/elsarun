@@ -12,6 +12,7 @@
 #include "entities/entity_manager.h"
 #include "components/input_component.h"
 #include "components/renderable_component.h"
+#include "components/physics_component.h"
 
 using namespace elsa;
 
@@ -21,7 +22,7 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
 
     auto t = rendering::Texture::load_from_bmp("assets/dude.bmp", renderer);
     player->add_component<components::RenderableComponent>(renderer, std::move(t));
-
+    player->add_component<components::PhysicsComponent>();
     player->add_component<components::InputComponent>();
 }
 
@@ -40,6 +41,7 @@ int main(int argc, char* args[])
 
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
+        em.init();
 
         auto dt = 0.016f;
         auto running = true;

@@ -49,7 +49,8 @@ namespace elsa {
             template<typename TComponent>
             inline TComponent* get_component()
             {
-                return static_cast<TComponent*>(components_[get_component_type_id<TComponent>()].get());
+                auto component_type_id = get_component_type_id<TComponent>();
+                return static_cast<TComponent*>(components_[component_type_id].get());
             }
 
             template <typename TComponent, typename... TArgs>
@@ -58,13 +59,21 @@ namespace elsa {
                 auto c = std::make_unique<TComponent>(std::forward<TArgs>(args)...);
 
                 c->entity = this;
-                c->init();
 
                 added_components_.push_back(c.get());
 
-                components_[get_component_type_id<TComponent>()] = std::move(c);
-                component_flags_[get_component_type_id<TComponent>()] = true;
+                auto component_type_id = get_component_type_id<TComponent>();
+                components_[component_type_id] = std::move(c);
+                component_flags_[component_type_id] = true;
             }
+
+            inline void init()
+            {
+                for (auto c : added_components_)
+                {
+                    c->init();
+                }
+            };
 
             inline void frame(float dt)
             {

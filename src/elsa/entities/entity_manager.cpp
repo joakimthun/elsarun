@@ -18,11 +18,19 @@ namespace elsa {
             return entities_.back().get();
         }
 
+        void EntityManager::init()
+        {
+            for (auto& e : entities_)
+            {
+                e->init();
+            }
+        }
+
         void EntityManager::frame(float dt)
         {
-            for (auto& c : entities_)
+            for (auto& e : entities_)
             {
-                c->frame(dt);
+                e->frame(dt);
             }
         }
     }
