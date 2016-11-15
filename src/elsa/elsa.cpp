@@ -53,7 +53,7 @@ int main(int argc, char* args[])
         const auto max_dt = 0.032f;
         auto dt = 0.016f;
         auto running = true;
-        input::InputManager::register_callback(input::InputEvent::Quit, [&running](float dt)
+        input::InputManager::register_callback(input::InputEvent::Quit, [&running]()
         {
             running = false;
         });
@@ -63,7 +63,7 @@ int main(int argc, char* args[])
 
         while (running)
         {
-            input::InputManager::handle_input(dt);
+            input::InputManager::handle_input();
 
             r->set_draw_color(rendering::Color::create(0, 0, 0));
             r->clear();
