@@ -23,6 +23,7 @@ namespace elsa {
             //renderer_->render_texture(texture_.get(), static_cast<i32>(position.x), static_cast<i32>(position.y));
 
             renderer_->set_draw_color(rendering::Color::create(255, 0, 0));
+            renderer_->fill_rect(static_cast<i32>(position.x), static_cast<i32>(position.y), 50, 50);
         }
     }
 }
