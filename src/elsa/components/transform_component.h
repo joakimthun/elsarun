@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "component.h"
 #include "../math/vector2D.h"
 
@@ -14,10 +12,7 @@ namespace elsa {
             math::Vector2D rotation;
             math::Vector2D scale;
 
-            void update(float dt) override
-            {
-                std::cout << "TransformComponent -> update" << std::endl;
-            };
+            ComponentType type() override { return ComponentType::TransformComponent; }
         };
 
     }

@@ -107,5 +107,8 @@
     <ClInclude Include="components\elsa_ai_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="components\component_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

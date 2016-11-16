@@ -8,11 +8,16 @@ namespace elsa {
 
         void ElsaAiComponent::init()
         {
-            physics_component_ = entity->get_component<PhysicsComponent>();
+            physics_component_ = entity->get_component<PhysicsComponent>(ComponentType::PhysicsComponent);
         }
 
         void ElsaAiComponent::update(float dt)
         {
+        }
+
+        ComponentType ElsaAiComponent::type()
+        {
+            return ComponentType::ElsaAiComponent;
         }
 
     }

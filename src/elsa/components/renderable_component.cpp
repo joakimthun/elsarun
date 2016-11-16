@@ -25,5 +25,9 @@ namespace elsa {
             renderer_->set_draw_color(rendering::Color::create(255, 0, 0));
             renderer_->fill_rect(static_cast<i32>(position.x), static_cast<i32>(position.y), 50, 50);
         }
+        ComponentType RenderableComponent::type()
+        {
+            return ComponentType::RenderableComponent;
+        }
     }
 }

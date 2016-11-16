@@ -18,6 +18,7 @@ namespace elsa {
         public:
             RenderableComponent(rendering::Renderer2D* renderer, std::unique_ptr<rendering::Texture> texture);
             void render() override;
+            ComponentType type() override;
 
         private:
             rendering::Renderer2D* renderer_;

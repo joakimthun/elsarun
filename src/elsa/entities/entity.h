@@ -11,60 +11,41 @@
 namespace elsa {
     namespace entities {
 
-        inline std::size_t get_unique_component_id()
+        inline std::size_t constexpr get_component_type_index(components::ComponentType component_type)
         {
-            static std::size_t last_id{ 0u };
-            return last_id++;
+            return static_cast<std::size_t>(component_type);
         }
-
-        template <typename TComponent>
-        inline std::size_t get_component_type_id()
-        {
-            static_assert(std::is_base_of<components::Component, TComponent>::value, "TComponent must inherit from Component");
-
-            // Every time we call this function with a specific type `T`,
-            // we are actually calling an instantiation of this template,
-            // with its own unique static `typeID` variable.
-
-            // Upon calling this function for the first time with a specific
-            // type `T1`, `typeID` will be initialized with an unique ID.
-            // Subsequent calls with the same type `T1` will return the
-            // same ID.
-
-            static std::size_t type_id{ get_unique_component_id() };
-            return type_id;
-        }
-
-        const std::size_t NumComponents = 50;
 
         class Entity
         {
         public:
-            template<typename TComponent>
-            inline bool has_component() const 
+            inline bool has_component(components::ComponentType component_type) const
             {
-                return component_flags_[get_component_type_id<TComponent>()];
+                return component_flags_[get_component_type_index(component_type)];
             }
 
             template<typename TComponent>
-            inline TComponent* get_component()
+            inline TComponent* get_component(components::ComponentType component_type)
             {
-                auto component_type_id = get_component_type_id<TComponent>();
-                return static_cast<TComponent*>(components_[component_type_id].get());
+                static_assert(std::is_base_of<components::Component, TComponent>::value, "TComponent must inherit from Component");
+
+                return static_cast<TComponent*>(components_[get_component_type_index(component_type)].get());
             }
 
             template <typename TComponent, typename... TArgs>
             inline void add_component(TArgs&&... args)
             {
+                static_assert(std::is_base_of<components::Component, TComponent>::value, "TComponent must inherit from Component");
+
                 auto c = std::make_unique<TComponent>(std::forward<TArgs>(args)...);
 
                 c->entity = this;
+                auto component_type_index = get_component_type_index(c->type());
 
                 added_components_.push_back(c.get());
 
-                auto component_type_id = get_component_type_id<TComponent>();
-                components_[component_type_id] = std::move(c);
-                component_flags_[component_type_id] = true;
+                components_[component_type_index] = std::move(c);
+                component_flags_[component_type_index] = true;
             }
 
             inline void init()
@@ -86,8 +67,8 @@ namespace elsa {
 
             components::TransformComponent transform;
         private:
-            std::bitset<NumComponents> component_flags_;
-            std::array<std::unique_ptr<components::Component>, NumComponents> components_;
+            std::bitset<components::max_num_component_types()> component_flags_;
+            std::array<std::unique_ptr<components::Component>, components::max_num_component_types()> components_;
             std::vector<components::Component*> added_components_;
         };
     }

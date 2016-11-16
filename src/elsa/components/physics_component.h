@@ -9,6 +9,7 @@ namespace elsa {
         struct PhysicsComponent : Component
         {
             void update(float dt) override;
+            ComponentType type() override;
             math::Vector2D velocity;
         };
 

@@ -28,6 +28,7 @@ namespace elsa {
         {
             void init() override;
             void update(float dt) override;
+            ComponentType type() override;
 
         private:
             void set_state_down(Key k);

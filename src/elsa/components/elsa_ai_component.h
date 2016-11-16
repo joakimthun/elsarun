@@ -14,6 +14,7 @@ namespace elsa {
         {
             void init() override;
             void update(float dt) override;
+            ComponentType type() override;
 
         private:
             PhysicsComponent* physics_component_ = nullptr;

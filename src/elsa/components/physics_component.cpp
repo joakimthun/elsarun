@@ -19,5 +19,10 @@ namespace elsa {
             //std::cout << "velocity.y: " << velocity.y << std::endl;
         }
 
+        ComponentType PhysicsComponent::type()
+        {
+            return ComponentType::PhysicsComponent;
+        }
+
     }
 }

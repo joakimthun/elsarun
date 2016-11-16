@@ -11,7 +11,7 @@ namespace elsa {
 
         void InputComponent::init()
         {
-            physics_component_ = entity->get_component<PhysicsComponent>();
+            physics_component_ = entity->get_component<PhysicsComponent>(ComponentType::PhysicsComponent);
 
             input::InputManager::register_callback(input::InputEvent::Left_Up, [this]() { set_state_up(Key::Left); });
             input::InputManager::register_callback(input::InputEvent::Left_Down, [this]() { set_state_down(Key::Left); });
@@ -51,6 +51,11 @@ namespace elsa {
             {
                 physics_component_->velocity.x = 0;
             }
+        }
+
+        ComponentType InputComponent::type()
+        {
+            return ComponentType::InputComponent;
         }
 
         void InputComponent::set_state_down(Key k)
