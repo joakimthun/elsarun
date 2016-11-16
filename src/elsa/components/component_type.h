@@ -15,6 +15,7 @@ namespace elsa {
             InputComponent,
             RenderableComponent,
             RenderableRectComponent,
+            LeashComponent,
             MAX_VALUE
         };
 

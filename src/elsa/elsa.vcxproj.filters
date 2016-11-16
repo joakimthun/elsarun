@@ -57,6 +57,9 @@
     <ClCompile Include="components\renderable_rect_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="components\leash_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">
@@ -114,6 +117,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="components\renderable_rect_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\point2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\leash_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

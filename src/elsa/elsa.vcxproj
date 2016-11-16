@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="components\elsa_ai_component.cpp" />
     <ClCompile Include="components\input_component.cpp" />
+    <ClCompile Include="components\leash_component.cpp" />
     <ClCompile Include="components\physics_component.cpp" />
     <ClCompile Include="components\renderable_component.cpp" />
     <ClCompile Include="components\renderable_rect_component.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="components\component_type.h" />
     <ClInclude Include="components\elsa_ai_component.h" />
     <ClInclude Include="components\input_component.h" />
+    <ClInclude Include="components\leash_component.h" />
     <ClInclude Include="components\physics_component.h" />
     <ClInclude Include="components\renderable_component.h" />
     <ClInclude Include="components\renderable_rect_component.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="entities\entity.h" />
     <ClInclude Include="errors\elsa_exception.h" />
     <ClInclude Include="input\input_manager.h" />
+    <ClInclude Include="math\point2D.h" />
     <ClInclude Include="math\vector2D.h" />
     <ClInclude Include="rendering\color.h" />
     <ClInclude Include="rendering\renderer2d.h" />

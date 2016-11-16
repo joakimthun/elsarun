@@ -72,5 +72,10 @@ namespace elsa {
 
             SDL_RenderFillRect(renderer_, &rectangle);
         }
+
+        void Renderer2D::render_line(i32 x1, i32 y1, i32 x2, i32 y2)
+        {
+            SDL_RenderDrawLine(renderer_, x1, y1, x2, y2);
+        }
     }
 }

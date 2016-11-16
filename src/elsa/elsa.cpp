@@ -16,6 +16,7 @@
 #include "components/renderable_rect_component.h"
 #include "components/physics_component.h"
 #include "components/elsa_ai_component.h"
+#include "components/leash_component.h"
 
 using namespace elsa;
 
@@ -41,6 +42,7 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
     elsa->add_component<components::PhysicsComponent>();
     elsa->add_component<components::ElsaAiComponent>(SCREEN_WIDTH - 100, 100, SCREEN_HEIGHT, 0);
+    elsa->add_component<components::LeashComponent>(renderer, player, rendering::Color::create(0, 0, 255));
 }
 
 int main(int argc, char* args[])
