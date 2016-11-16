@@ -13,7 +13,9 @@
 #include "entities/entity_manager.h"
 #include "components/input_component.h"
 #include "components/renderable_component.h"
+#include "components/renderable_rect_component.h"
 #include "components/physics_component.h"
+#include "components/elsa_ai_component.h"
 
 using namespace elsa;
 
@@ -22,14 +24,23 @@ auto const SCREEN_HEIGHT = 600;
 
 void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer)
 {
+    // Player
     auto player = em.create_entity();
     player->transform.position.x = SCREEN_WIDTH / 2;
     player->transform.position.y = SCREEN_HEIGHT / 2;
 
-    auto t = rendering::Texture::load_from_bmp("assets/dude.bmp", renderer);
-    player->add_component<components::RenderableComponent>(renderer, std::move(t));
+    player->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(255, 0, 0), 50, 50);
     player->add_component<components::PhysicsComponent>();
     player->add_component<components::InputComponent>();
+
+    // Elsa
+    auto elsa = em.create_entity();
+    elsa->transform.position.x = SCREEN_WIDTH / 2;
+    elsa->transform.position.y = SCREEN_HEIGHT / 2 - 100;
+
+    elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
+    elsa->add_component<components::PhysicsComponent>();
+    elsa->add_component<components::ElsaAiComponent>();
 }
 
 int main(int argc, char* args[])

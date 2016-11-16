@@ -14,6 +14,7 @@ namespace elsa {
             ElsaAiComponent,
             InputComponent,
             RenderableComponent,
+            RenderableRectComponent,
             MAX_VALUE
         };
 

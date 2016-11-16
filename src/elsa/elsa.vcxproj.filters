@@ -54,6 +54,9 @@
     <ClCompile Include="components\elsa_ai_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="components\renderable_rect_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="components\component_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\renderable_rect_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
