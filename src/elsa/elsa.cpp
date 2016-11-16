@@ -27,7 +27,7 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     // Player
     auto player = em.create_entity();
     player->transform.position.x = SCREEN_WIDTH / 2;
-    player->transform.position.y = SCREEN_HEIGHT / 2;
+    player->transform.position.y = SCREEN_HEIGHT / 2 + 200;
 
     player->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(255, 0, 0), 50, 50);
     player->add_component<components::PhysicsComponent>();
@@ -36,11 +36,11 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     // Elsa
     auto elsa = em.create_entity();
     elsa->transform.position.x = SCREEN_WIDTH / 2;
-    elsa->transform.position.y = SCREEN_HEIGHT / 2 - 100;
+    elsa->transform.position.y = SCREEN_HEIGHT / 2 - 200;
 
     elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
     elsa->add_component<components::PhysicsComponent>();
-    elsa->add_component<components::ElsaAiComponent>();
+    elsa->add_component<components::ElsaAiComponent>(SCREEN_WIDTH - 100, 100, SCREEN_HEIGHT, 0);
 }
 
 int main(int argc, char* args[])
