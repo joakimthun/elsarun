@@ -7,7 +7,7 @@
 namespace elsa {
     namespace input {
 
-        static std::array<std::vector<std::function<void()>>, InputManager::max_num_events()> callbacks;
+        static std::array<std::vector<std::function<void()>>, max_num_events()> callbacks;
 
         void InputManager::handle_input()
         {

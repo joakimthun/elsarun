@@ -19,7 +19,7 @@ namespace elsa {
             MAX_VALUE
         };
 
-        inline static std::size_t constexpr max_num_keys()
+        inline std::size_t constexpr max_num_keys()
         {
             return static_cast<std::size_t>(Key::MAX_VALUE);
         }

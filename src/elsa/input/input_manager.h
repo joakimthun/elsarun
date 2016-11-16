@@ -21,15 +21,16 @@ namespace elsa {
             MAX_VALUE
         };
 
+        inline std::size_t constexpr max_num_events()
+        {
+            return static_cast<std::size_t>(InputEvent::MAX_VALUE);
+        }
+
         class InputManager
         {
         public:
             static void handle_input();
             static void register_callback(InputEvent e, std::function<void()> callback);
-            inline static std::size_t constexpr max_num_events() 
-            { 
-                return static_cast<std::size_t>(InputEvent::MAX_VALUE); 
-            }
 
         private:
             InputManager() = delete;
