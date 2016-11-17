@@ -1,6 +1,9 @@
 #include "tiled_loader.h"
 
 #include <json.hpp>
+#include <fstream>
+
+#include "../errors/elsa_exception.h"
 
 namespace elsa {
     namespace loaders {
@@ -9,8 +12,15 @@ namespace elsa {
 
         void TiledLoader::load_from_json(const std::string& path)
         {
-            // create object from string literal
-            json j = "{ \"happy\": true, \"pi\": 3.141 }"_json;
+            std::ifstream fs;
+            fs.open(path, std::ifstream::in);
+
+            if (!fs.is_open())
+            {
+                throw errors::ElsaException("TiledLoader::load_from_json: Could not open the file: " + path);
+            }
+
+            auto const parsed = json::parse(fs);
         }
 
     }
