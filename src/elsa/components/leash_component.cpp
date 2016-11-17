@@ -9,7 +9,7 @@
 namespace elsa {
     namespace components {
 
-        auto const LEASH_FORCE = 0.5f;
+        auto const LEASH_FORCE = 0.8f;
 
         LeashComponent::LeashComponent(rendering::Renderer2D* renderer, entities::Entity* slave, rendering::Color color)
             :

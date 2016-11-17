@@ -20,8 +20,8 @@
 
 using namespace elsa;
 
-auto const SCREEN_WIDTH = 800;
-auto const SCREEN_HEIGHT = 600;
+auto const SCREEN_WIDTH = 720;
+auto const SCREEN_HEIGHT = 1080;
 
 void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer)
 {
