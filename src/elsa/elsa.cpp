@@ -90,7 +90,7 @@ int main(int argc, char* args[])
                 dt = max_dt;
             }
 
-            if (num_frames % 10 == 0)
+            if (num_frames % 10000 == 0)
             {
                 std::cout << "dt: " << dt << std::endl;
             }

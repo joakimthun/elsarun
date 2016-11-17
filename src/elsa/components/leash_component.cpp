@@ -2,9 +2,14 @@
 
 #include "../rendering/renderer2d.h"
 #include "../entities/entity.h"
+#include "physics_component.h"
+
+#include <iostream>
 
 namespace elsa {
     namespace components {
+
+        auto const LEASH_FORCE = 0.5f;
 
         LeashComponent::LeashComponent(rendering::Renderer2D* renderer, entities::Entity* slave, rendering::Color color)
             :
@@ -14,8 +19,28 @@ namespace elsa {
         {
         }
 
+        void LeashComponent::init()
+        {
+            slave_physics_component_ = slave_->get_component<PhysicsComponent>(ComponentType::PhysicsComponent);
+        }
+
         void LeashComponent::update(float dt)
         {
+            auto master_position = entity->transform.position;
+            auto slave_position = slave_->transform.position;
+
+            auto master_direction = master_position - slave_position;
+
+            slave_physics_component_->velocity += (master_direction * LEASH_FORCE);
+
+            static int fc = 0;
+
+            if (fc % 1000 == 0)
+            {
+                std::cout << "x: " << master_direction.x << ", y: " << master_direction.y << std::endl;
+            }
+
+            fc++;
         }
 
         void LeashComponent::render()

@@ -18,9 +18,12 @@ namespace elsa {
 
     namespace components {
 
+        struct PhysicsComponent;
+
         struct LeashComponent : Component
         {
             LeashComponent(rendering::Renderer2D* renderer, entities::Entity* slave, rendering::Color color);
+            void init() override;
             void update(float dt) override;
             void render() override;
             ComponentType type() override;
@@ -29,6 +32,7 @@ namespace elsa {
             rendering::Renderer2D* renderer_; 
             entities::Entity* slave_;
             rendering::Color color_;
+            PhysicsComponent* slave_physics_component_ = nullptr;
         };
 
     }
