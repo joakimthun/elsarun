@@ -9,8 +9,11 @@
 #include "timing/timer.h"
 
 #include "input/input_manager.h"
+#include "loaders/tiled_loader.h"
+
 #include "entities/entity.h"
 #include "entities/entity_manager.h"
+
 #include "components/input_component.h"
 #include "components/renderable_component.h"
 #include "components/renderable_rect_component.h"
@@ -55,6 +58,8 @@ int main(int argc, char* args[])
 
     try
     {
+        loaders::TiledLoader::load_from_json("");
+
         auto w = rendering::Window::create("Elsa!", SCREEN_WIDTH, SCREEN_HEIGHT);
         auto r = rendering::Renderer2D::create(w.get(), false);
 

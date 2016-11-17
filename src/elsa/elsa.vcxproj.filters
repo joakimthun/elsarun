@@ -60,6 +60,9 @@
     <ClCompile Include="components\leash_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loaders\tiled_loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="components\leash_component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loaders\tiled_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

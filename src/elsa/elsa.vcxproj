@@ -71,22 +71,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\lib\json;$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\..\lib\SDL2-2.0.5\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\lib\json;$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\..\lib\SDL2-2.0.5\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\lib\json;$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\..\lib\SDL2-2.0.5\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\lib\json;$(SolutionDir)\..\lib\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\..\lib\SDL2-2.0.5\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -168,6 +168,7 @@
     <ClCompile Include="elsa.cpp" />
     <ClCompile Include="errors\elsa_exception.cpp" />
     <ClCompile Include="input\input_manager.cpp" />
+    <ClCompile Include="loaders\tiled_loader.cpp" />
     <ClCompile Include="math\vector2D.cpp" />
     <ClCompile Include="rendering\renderer2d.cpp" />
     <ClCompile Include="rendering\texture.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="entities\entity.h" />
     <ClInclude Include="errors\elsa_exception.h" />
     <ClInclude Include="input\input_manager.h" />
+    <ClInclude Include="loaders\tiled_loader.h" />
     <ClInclude Include="math\point2D.h" />
     <ClInclude Include="math\vector2D.h" />
     <ClInclude Include="rendering\color.h" />
