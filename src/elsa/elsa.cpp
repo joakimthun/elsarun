@@ -58,7 +58,7 @@ int main(int argc, char* args[])
 
     try
     {
-        loaders::TiledLoader::load_from_json("assets/tilesets/background.json");
+        auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/background.json");
 
         auto w = rendering::Window::create("Elsa!", SCREEN_WIDTH, SCREEN_HEIGHT);
         auto r = rendering::Renderer2D::create(w.get(), false);
