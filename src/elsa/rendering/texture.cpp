@@ -1,5 +1,7 @@
 #include "texture.h"
 
+#include <SDL_image.h>
+
 #include "renderer2d.h"
 #include "../errors/elsa_exception.h"
 
@@ -13,14 +15,14 @@ namespace elsa {
             SDL_DestroyTexture(texture_);
         }
 
-        std::unique_ptr<Texture> Texture::load_from_bmp(const char* path, const Renderer2D* renderer)
+        std::unique_ptr<Texture> Texture::load_from_file(const std::string& path, const Renderer2D* renderer)
         {
             auto texture = std::make_unique<Texture>();
-            auto surface = SDL_LoadBMP(path);
+            auto surface = IMG_Load(path.c_str());
 
             if (surface == nullptr)
             {
-                throw errors::ElsaException(SDL_GetError());
+                throw errors::ElsaException(IMG_GetError());
             }
 
             texture->texture_ = SDL_CreateTextureFromSurface(renderer->renderer_, surface);
