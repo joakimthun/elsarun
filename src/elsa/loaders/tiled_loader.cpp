@@ -53,13 +53,17 @@ namespace elsa {
                 set.texture = rendering::Texture::load_from_file("assets/tilesets/" + set.image, renderer);
                 set.rows = set.tile_count / set.columns;
 
-                auto tile_properties_json = json_set["tileproperties"];
-                for (auto i{ 0u }; i < set.tile_count; i++)
+                auto json_has_tile_properties = json_set.find("tileproperties") != json_set.end();
+                if (json_has_tile_properties)
                 {
-                    auto prop_json = tile_properties_json[std::to_string(i)];
-                    if (!prop_json.is_null())
+                    auto tile_properties_json = json_set["tileproperties"];
+                    for (auto i{ 0u }; i < set.tile_count; i++)
                     {
-                        set.tile_properties.push_back(tiles::TileProperty{ i, prop_json["collidable"] });
+                        auto prop_json = tile_properties_json[std::to_string(i)];
+                        if (!prop_json.is_null())
+                        {
+                            set.tile_properties.push_back(tiles::TileProperty{ i, prop_json["collidable"] });
+                        }
                     }
                 }
             }
@@ -101,8 +105,8 @@ namespace elsa {
                     auto src_row = static_cast<std::size_t>(std::floor(tile_index / tile_set.columns));
                     auto src_tile_coordinates = tiles::TileMap::get_tile_coordinates(src_column, src_row, tile_map->tile_width, tile_map->tile_height);
 
-                    tile.x = src_tile_coordinates.x;
-                    tile.y = src_tile_coordinates.y;
+                    tile.x = src_tile_coordinates.x + tile_set.spacing * src_column;
+                    tile.y = src_tile_coordinates.y + tile_set.spacing * src_row;
                     tile.index = tile_index;
 
 
