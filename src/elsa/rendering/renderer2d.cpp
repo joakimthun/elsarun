@@ -61,6 +61,23 @@ namespace elsa {
             SDL_RenderCopy(renderer_, texture->texture_, nullptr, &rectangle);
         }
 
+        void Renderer2D::render_tile(const Texture * texture, i32 x, i32 y, i32 tile_pos_x, i32 tile_pos_y, i32 tile_width, i32 tile_height)
+        {
+            SDL_Rect src_rectangle;
+            src_rectangle.x = tile_pos_x;
+            src_rectangle.y = tile_pos_y;
+            src_rectangle.w = tile_width;
+            src_rectangle.h = tile_height;
+
+            SDL_Rect dest_rectangle;
+            dest_rectangle.x = x;
+            dest_rectangle.y = y;
+            dest_rectangle.w = tile_width;
+            dest_rectangle.h = tile_height;
+
+            SDL_RenderCopy(renderer_, texture->texture_, &src_rectangle, &dest_rectangle);
+        }
+
         void Renderer2D::fill_rect(i32 x, i32 y, i32 width, i32 height)
         {
             SDL_Rect rectangle;

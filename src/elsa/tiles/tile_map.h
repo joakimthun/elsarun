@@ -2,23 +2,36 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "../typedef.h"
+#include "../rendering/texture.h"
 
 namespace elsa {
+
+    namespace rendering {
+        Renderer2D;
+    }
+
     namespace tiles {
+
+        struct TileCoordinates
+        {
+            u32 x;
+            u32 y;
+        };
 
         struct TileLayer
         {
-            std::vector<i32> data;
-            i32 height;
+            std::vector<std::vector<i32>> data;
+            u32 height;
             std::string name;
             i32 opacity;
             std::string type;
             bool visible;
-            i32 width;
-            i32 x;
-            i32 y;
+            u32 width;
+            u32 x;
+            u32 y;
         };
 
         struct TileProperty
@@ -29,7 +42,8 @@ namespace elsa {
 
         struct TileSet
         {
-            i32 columns;
+            u32 columns;
+            u32 rows;
             i32 firstgid;
             std::string image;
             i32 image_height;
@@ -41,10 +55,14 @@ namespace elsa {
             i32 tile_height;
             i32 tile_width;
             std::vector<TileProperty> tile_properties;
+            std::unique_ptr<rendering::Texture> texture;
         };
 
-        struct TileMap
+        class TileMap
         {
+        public:
+            void render(rendering::Renderer2D* renderer) const;
+
             i32 height;
             std::vector<TileLayer> layers;
             i32 next_object_id;
@@ -55,6 +73,9 @@ namespace elsa {
             i32 tile_width;
             i32 version;
             i32 width;
+        private:
+            TileCoordinates get_tile_coordinates(std::size_t column, std::size_t row) const;
+            void render_layer(rendering::Renderer2D* renderer, std::size_t layer_index) const;
         };
     }
 }

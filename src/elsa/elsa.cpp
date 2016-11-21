@@ -69,8 +69,7 @@ int main(int argc, char* args[])
         auto w = rendering::Window::create("Elsa!", SCREEN_WIDTH, SCREEN_HEIGHT);
         auto r = rendering::Renderer2D::create(w.get(), false);
 
-        auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/background.json");
-        auto bg_tile_texture = rendering::Texture::load_from_file("assets/tilesets/rpg_sheet.png", r.get());
+        auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/background.json", r.get());
 
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
@@ -95,9 +94,8 @@ int main(int argc, char* args[])
             r->set_draw_color(rendering::Color::create(0, 0, 0));
             r->clear();
 
+            bg_tile_map->render(r.get());
             em.frame(dt);
-
-            r->render_texture(bg_tile_texture.get(), 0, 0);
 
             r->present();
 

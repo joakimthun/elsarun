@@ -1,13 +1,15 @@
 #include "tiled_loader.h"
 
 #include <fstream>
+#include <assert.h>
 
 #include "../errors/elsa_exception.h"
+#include "../rendering/renderer2d.h"
 
 namespace elsa {
     namespace loaders {
 
-        std::unique_ptr<const tiles::TileMap> TiledLoader::load_from_json(const std::string& path)
+        std::unique_ptr<const tiles::TileMap> TiledLoader::load_from_json(const std::string& path, rendering::Renderer2D* renderer)
         {
             std::ifstream fs;
             fs.open(path, std::ifstream::in);
@@ -17,10 +19,10 @@ namespace elsa {
                 throw errors::ElsaException("TiledLoader::load_from_json: Could not open the file: " + path);
             }
 
-            return create_map(json::parse(fs));
+            return create_map(json::parse(fs), renderer);
         }
 
-        std::unique_ptr<const tiles::TileMap> TiledLoader::create_map(const json& map)
+        std::unique_ptr<const tiles::TileMap> TiledLoader::create_map(const json& map, rendering::Renderer2D* renderer)
         {
             auto tile_map = std::make_unique<tiles::TileMap>();
 
@@ -38,11 +40,6 @@ namespace elsa {
                 tile_map->layers.push_back(tiles::TileLayer{});
                 auto& layer = tile_map->layers.back();
 
-                for (const auto& json_data : json_layer["data"])
-                {
-                    layer.data.push_back(json_data);
-                }
-
                 layer.height = json_layer["height"];
                 layer.name = json_layer["name"];
                 layer.opacity = json_layer["opacity"];
@@ -51,6 +48,26 @@ namespace elsa {
                 layer.width = json_layer["width"];
                 layer.x = json_layer["x"];
                 layer.y = json_layer["y"];
+
+                auto layer_data = json_layer["data"];
+                auto row = 0u;
+                auto column = 0u;
+                for (const auto& json_data : layer_data)
+                {
+                    if (layer.data.size() < row + 1)
+                    {
+                        layer.data.push_back(std::vector<i32>());
+                    }
+
+                    layer.data[row].push_back(json_data);
+                    column++;
+
+                    if (((column) % layer.width) == 0)
+                    {
+                        row++;
+                        column = 0;
+                    }
+                }
             }
 
             for (const auto& json_set : map["tilesets"])
@@ -67,6 +84,9 @@ namespace elsa {
                 set.spacing = json_set["spacing"];
                 set.tile_count = json_set["tilecount"];
                 set.tile_height = json_set["tileheight"];
+                set.tile_width = json_set["tilewidth"];
+                set.texture = rendering::Texture::load_from_file("assets/tilesets/" + set.image, renderer);
+                set.rows = set.tile_count / set.columns;
 
                 auto tile_properties_json = json_set["tileproperties"];
                 for (i32 i{ 0 }; i < set.tile_count; i++)
@@ -78,6 +98,9 @@ namespace elsa {
                     }
                 }
             }
+
+            // The only supported "format" right now
+            assert(tile_map->render_order == "right-down");
 
             return std::move(tile_map);
         }

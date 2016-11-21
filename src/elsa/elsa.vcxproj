@@ -173,6 +173,7 @@
     <ClCompile Include="rendering\renderer2d.cpp" />
     <ClCompile Include="rendering\texture.cpp" />
     <ClCompile Include="rendering\window.cpp" />
+    <ClCompile Include="tiles\tile_map.cpp" />
     <ClCompile Include="timing\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
