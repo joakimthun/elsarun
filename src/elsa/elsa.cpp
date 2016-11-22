@@ -11,6 +11,7 @@
 
 #include "input/input_manager.h"
 #include "loaders/tiled_loader.h"
+#include "sprites/sprite.h"
 
 #include "entities/entity.h"
 #include "entities/entity_manager.h"
@@ -72,6 +73,12 @@ int main(int argc, char* args[])
         //auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/background.json", r.get());
         auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/platformer_bg.json", r.get());
 
+        // Test sprite
+        auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/alien_beige.png", r.get());
+        auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.25f);
+        test_sprite.add_frame(0, 294, 68, 93);
+        test_sprite.add_frame(0, 100, 70, 96);
+
         auto em = entities::EntityManager();
         setup_entities(em, r.get());
         em.init();
@@ -95,7 +102,14 @@ int main(int argc, char* args[])
             r->set_draw_color(rendering::Color::create(0, 0, 0));
             r->clear();
 
+            // Test
+
             bg_tile_map->render(r.get());
+            test_sprite.update(dt);
+            test_sprite.render(r.get(), 50, 50);
+
+            // Test
+
             em.frame(dt);
 
             r->present();

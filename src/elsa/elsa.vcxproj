@@ -173,6 +173,7 @@
     <ClCompile Include="rendering\renderer2d.cpp" />
     <ClCompile Include="rendering\texture.cpp" />
     <ClCompile Include="rendering\window.cpp" />
+    <ClCompile Include="sprites\sprite.cpp" />
     <ClCompile Include="tiles\tile_map.cpp" />
     <ClCompile Include="timing\timer.cpp" />
   </ItemGroup>
@@ -196,6 +197,7 @@
     <ClInclude Include="rendering\color.h" />
     <ClInclude Include="rendering\renderer2d.h" />
     <ClInclude Include="rendering\texture.h" />
+    <ClInclude Include="sprites\sprite.h" />
     <ClInclude Include="tiles\tile_map.h" />
     <ClInclude Include="timing\timer.h" />
     <ClInclude Include="typedef.h" />
