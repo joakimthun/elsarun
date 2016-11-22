@@ -63,17 +63,8 @@ namespace elsa {
 
         void Renderer2D::render_texture(const Texture* texture, i32 dest_x, i32 dest_y, i32 src_x, i32 src_y, i32 width, i32 height)
         {
-            SDL_Rect src_rectangle;
-            src_rectangle.x = src_x;
-            src_rectangle.y = src_y;
-            src_rectangle.w = width;
-            src_rectangle.h = height;
-
-            SDL_Rect dest_rectangle;
-            dest_rectangle.x = dest_x;
-            dest_rectangle.y = dest_y;
-            dest_rectangle.w = width;
-            dest_rectangle.h = height;
+            SDL_Rect src_rectangle{ src_x, src_y, width, height };
+            SDL_Rect dest_rectangle{ dest_x, dest_y, width, height };
 
             SDL_RenderCopy(renderer_, texture->texture_, &src_rectangle, &dest_rectangle);
         }
