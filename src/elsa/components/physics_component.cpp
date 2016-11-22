@@ -3,20 +3,21 @@
 #include "../entities/entity.h"
 #include "transform_component.h"
 
-#include <iostream>
-
 namespace elsa {
     namespace components {
+
+        PhysicsComponent::PhysicsComponent(math::Vector2D& gravity)
+            :
+            gravity(gravity)
+        {
+        }
 
         void PhysicsComponent::update(float dt)
         {
             entity->transform.position.x += (velocity.x * dt);
             entity->transform.position.y += (velocity.y * dt);
-
-            //std::cout << "position.x: " << entity->transform.position.x << std::endl;
-            //std::cout << "position.y: " << entity->transform.position.y << std::endl;
-            //std::cout << "velocity.x: " << velocity.x << std::endl;
-            //std::cout << "velocity.y: " << velocity.y << std::endl;
+            entity->transform.position.x += (gravity.x * dt);
+            entity->transform.position.y += (gravity.y * dt);
         }
 
         ComponentType PhysicsComponent::type()

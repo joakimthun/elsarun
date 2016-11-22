@@ -8,6 +8,7 @@
 #include "rendering/texture.h"
 #include "rendering/color.h"
 #include "timing/timer.h"
+#include "math/vector2D.h"
 
 #include "input/input_manager.h"
 #include "loaders/tiled_loader.h"
@@ -36,7 +37,7 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     player->transform.position.y = SCREEN_HEIGHT / 2 + 200;
 
     player->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(255, 0, 0), 50, 50);
-    player->add_component<components::PhysicsComponent>();
+    player->add_component<components::PhysicsComponent>(math::Vector2D(0, 150.f));
     player->add_component<components::InputComponent>();
 
     // Elsa
@@ -45,7 +46,7 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     elsa->transform.position.y = SCREEN_HEIGHT / 2 - 200;
 
     elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
-    elsa->add_component<components::PhysicsComponent>();
+    elsa->add_component<components::PhysicsComponent>(math::Vector2D(0, 0));
     elsa->add_component<components::ElsaAiComponent>(SCREEN_WIDTH - 100, 100, SCREEN_HEIGHT, 0);
     elsa->add_component<components::LeashComponent>(renderer, player, rendering::Color::create(0, 0, 255));
 }
@@ -89,6 +90,7 @@ int main(int argc, char* args[])
         auto running = true;
         input::InputManager::register_callback(input::InputEvent::Quit, [&running]()
         {
+            std::cout << "input::InputEvent::Quit" << std::endl;
             running = false;
         });
 

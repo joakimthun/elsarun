@@ -8,9 +8,13 @@ namespace elsa {
 
         struct PhysicsComponent : Component
         {
+            PhysicsComponent(math::Vector2D& gravity);
+
             void update(float dt) override;
             ComponentType type() override;
+
             math::Vector2D velocity;
+            math::Vector2D gravity;
         };
 
     }
