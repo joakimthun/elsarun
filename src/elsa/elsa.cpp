@@ -41,14 +41,14 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     player->add_component<components::InputComponent>();
 
     // Elsa
-    auto elsa = em.create_entity();
-    elsa->transform.position.x = SCREEN_WIDTH / 2;
-    elsa->transform.position.y = SCREEN_HEIGHT / 2 - 200;
-
-    elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
-    elsa->add_component<components::PhysicsComponent>(math::Vector2D(0, 0));
-    elsa->add_component<components::ElsaAiComponent>(SCREEN_WIDTH - 100, 100, SCREEN_HEIGHT, 0);
-    elsa->add_component<components::LeashComponent>(renderer, player, rendering::Color::create(0, 0, 255));
+    //auto elsa = em.create_entity();
+    //elsa->transform.position.x = SCREEN_WIDTH / 2;
+    //elsa->transform.position.y = SCREEN_HEIGHT / 2 - 200;
+    //
+    //elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
+    //elsa->add_component<components::PhysicsComponent>(math::Vector2D(0, 0));
+    //elsa->add_component<components::ElsaAiComponent>(SCREEN_WIDTH - 100, 100, SCREEN_HEIGHT, 0);
+    //elsa->add_component<components::LeashComponent>(renderer, player, rendering::Color::create(0, 0, 255));
 }
 
 int main(int argc, char* args[])

@@ -14,10 +14,8 @@ namespace elsa {
 
         void PhysicsComponent::update(float dt)
         {
-            entity->transform.position.x += (velocity.x * dt);
-            entity->transform.position.y += (velocity.y * dt);
-            entity->transform.position.x += (gravity.x * dt);
-            entity->transform.position.y += (gravity.y * dt);
+            entity->transform.position += (velocity * dt);
+            entity->transform.position += (gravity * dt);
         }
 
         ComponentType PhysicsComponent::type()
