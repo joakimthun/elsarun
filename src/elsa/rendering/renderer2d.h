@@ -25,7 +25,7 @@ namespace elsa {
             void clear();
             void present();
             void render_texture(const Texture* texture, i32 x, i32 y);
-            void render_tile(const Texture* texture, i32 x, i32 y, i32 tile_pos_x, i32 tile_pos_y, i32 tile_width, i32 tile_height);
+            void render_texture(const Texture* texture, i32 dest_x, i32 dest_y, i32 src_x, i32 src_y, i32 width, i32 height);
             void fill_rect(i32 x, i32 y, i32 width, i32 height);
             void render_line(i32 x1, i32 y1, i32 x2, i32 y2);
 

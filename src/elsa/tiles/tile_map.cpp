@@ -35,7 +35,7 @@ namespace elsa {
                     if (tile.has_tile)
                     {
                         auto dest_coordinates = get_tile_coordinates(column, row, tile_set.tile_width, tile_set.tile_height);
-                        renderer->render_tile(tile_set.texture.get(), dest_coordinates.x, dest_coordinates.y, tile.x, tile.y, tile_width, tile_height);
+                        renderer->render_texture(tile_set.texture.get(), dest_coordinates.x, dest_coordinates.y, tile.x, tile.y, tile_width, tile_height);
                     }
                 }
             }
