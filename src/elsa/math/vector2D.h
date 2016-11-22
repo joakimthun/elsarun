@@ -18,6 +18,7 @@ namespace elsa {
             Vector2D operator/=(float scalar);
             float length() const;
             void normalize();
+            void lerp(const Vector2D& goal, float dt);
         };
     }
 }

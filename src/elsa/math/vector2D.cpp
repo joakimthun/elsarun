@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+#include "util.h"
+
 namespace elsa {
     namespace math {
 
@@ -63,6 +65,12 @@ namespace elsa {
             {
                 (*this) *= 1 / aux_length;
             }
+        }
+
+        void Vector2D::lerp(const Vector2D& goal, float dt)
+        {
+            x = util::lerp(goal.x, x, dt);
+            y = util::lerp(goal.y, y, dt);
         }
     }
 }

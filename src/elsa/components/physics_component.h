@@ -14,6 +14,7 @@ namespace elsa {
             ComponentType type() override;
 
             math::Vector2D velocity;
+            math::Vector2D velocity_goal;
             math::Vector2D gravity;
         };
 

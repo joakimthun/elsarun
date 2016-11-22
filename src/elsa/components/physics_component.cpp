@@ -14,6 +14,8 @@ namespace elsa {
 
         void PhysicsComponent::update(float dt)
         {
+            velocity.lerp(velocity_goal, dt * 100);
+
             entity->transform.position += (velocity * dt);
             entity->transform.position += (gravity * dt);
         }

@@ -28,28 +28,28 @@ namespace elsa {
         {
             if (is_down(Key::Up))
             {
-                physics_component_->velocity.y = -VELOCITY;
+                physics_component_->velocity_goal.y = -VELOCITY;
             }
             else if (is_down(Key::Down))
             {
-                physics_component_->velocity.y = VELOCITY;
+                physics_component_->velocity_goal.y = VELOCITY;
             }
             else
             {
-                physics_component_->velocity.y = 0;
+                physics_component_->velocity_goal.y = 0;
             }
 
             if (is_down(Key::Left))
             {
-                physics_component_->velocity.x = -VELOCITY;
+                physics_component_->velocity_goal.x = -VELOCITY;
             }
             else if (is_down(Key::Right))
             {
-                physics_component_->velocity.x = VELOCITY;
+                physics_component_->velocity_goal.x = VELOCITY;
             }
             else
             {
-                physics_component_->velocity.x = 0;
+                physics_component_->velocity_goal.x = 0;
             }
         }
 

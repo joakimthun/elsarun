@@ -193,6 +193,7 @@
     <ClInclude Include="input\input_manager.h" />
     <ClInclude Include="loaders\tiled_loader.h" />
     <ClInclude Include="math\point2D.h" />
+    <ClInclude Include="math\util.h" />
     <ClInclude Include="math\vector2D.h" />
     <ClInclude Include="rendering\color.h" />
     <ClInclude Include="rendering\renderer2d.h" />
