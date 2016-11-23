@@ -6,10 +6,16 @@
 namespace elsa {
     namespace components {
 
-        PhysicsComponent::PhysicsComponent(math::Vector2D& gravity)
+        PhysicsComponent::PhysicsComponent(math::Vector2D& gravity, u32 width, u32 height)
             :
-            gravity(gravity)
+            gravity(gravity),
+            body(std::make_unique<physics::AABB>(0, 0, width, height))
         {
+        }
+
+        void PhysicsComponent::init()
+        {
+            update_body();
         }
 
         void PhysicsComponent::update(float dt)
@@ -18,11 +24,19 @@ namespace elsa {
 
             entity->transform.position += (velocity * dt);
             entity->transform.position += (gravity * dt);
+
+            update_body();
         }
 
         ComponentType PhysicsComponent::type()
         {
             return ComponentType::PhysicsComponent;
+        }
+
+        void PhysicsComponent::update_body()
+        {
+            body->x = static_cast<u32>(entity->transform.position.x);
+            body->y = static_cast<u32>(entity->transform.position.y);
         }
 
     }
