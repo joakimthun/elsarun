@@ -7,11 +7,11 @@
 namespace elsa {
     namespace tiles {
 
-        void TileMap::init_tile_dest_coordinates()
+        void TileMap::init()
         {
             for (std::size_t layer_index{ 0 }; layer_index < layers.size(); layer_index++)
             {
-                init_tile_dest_coordinates_layer(layer_index);
+                init_layer(layer_index);
             }
         }
 
@@ -46,12 +46,12 @@ namespace elsa {
             }
         }
 
-        void TileMap::init_tile_dest_coordinates_layer(std::size_t layer_index)
+        void TileMap::init_layer(std::size_t layer_index)
         {
+            // Init dest coordinates and collidable_tiles
+
             auto& tile_layer = layers[layer_index];
             const auto& tile_set = tile_sets[0];
-            auto tile_height = tile_set.tile_height;
-            auto tile_width = tile_set.tile_width;
 
             for (std::size_t column = 0; column < tile_layer.width; column++)
             {
@@ -63,6 +63,11 @@ namespace elsa {
                         auto dest_coordinates = get_tile_coordinates(column, row, tile_set.tile_width, tile_set.tile_height);
                         tile.dest_x = dest_coordinates.x;
                         tile.dest_y = dest_coordinates.y;
+
+                        if (tile.collidable)
+                        {
+                            tile_layer.collidable_tiles.push_back(physics::AABB(tile.dest_x, tile.dest_y, tile_set.tile_width, tile_set.tile_height));
+                        }
                     }
                 }
             }

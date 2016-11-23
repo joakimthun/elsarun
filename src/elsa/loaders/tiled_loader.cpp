@@ -124,6 +124,7 @@ namespace elsa {
                     }
 
                     layer.tiles[row].push_back(tile);
+
                     column++;
 
                     if (((column) % layer.width) == 0)
@@ -137,7 +138,7 @@ namespace elsa {
             // The only supported "format" right now
             assert(tile_map->render_order == "right-down");
 
-            tile_map->init_tile_dest_coordinates();
+            tile_map->init();
 
             return std::move(tile_map);
         }

@@ -6,6 +6,7 @@
 
 #include "../typedef.h"
 #include "../rendering/texture.h"
+#include "../physics/aabb.h"
 
 namespace elsa {
 
@@ -35,6 +36,7 @@ namespace elsa {
         struct TileLayer
         {
             std::vector<std::vector<Tile>> tiles;
+            std::vector<physics::AABB> collidable_tiles;
             u32 height;
             std::string name;
             i32 opacity;
@@ -72,7 +74,7 @@ namespace elsa {
         class TileMap
         {
         public:
-            void init_tile_dest_coordinates();
+            void init();
             void render(rendering::Renderer2D* renderer) const;
             static TileCoordinates get_tile_coordinates(std::size_t column, std::size_t row, u32 tile_width, u32 tile_height);
 
@@ -88,7 +90,7 @@ namespace elsa {
             u32 width;
         private:
             void render_layer(rendering::Renderer2D* renderer, std::size_t layer_index) const;
-            void init_tile_dest_coordinates_layer(std::size_t layer_index);
+            void init_layer(std::size_t layer_index);
         };
     }
 }
