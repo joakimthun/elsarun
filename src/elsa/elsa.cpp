@@ -2,54 +2,7 @@
 #include <SDL_image.h>
 #include <iostream>
 
-#include "errors/elsa_exception.h"
-#include "rendering/window.h"
-#include "rendering/renderer2d.h"
-#include "rendering/texture.h"
-#include "rendering/color.h"
-#include "timing/timer.h"
-#include "math/vector2D.h"
-
-#include "input/input_manager.h"
-#include "loaders/tiled_loader.h"
-#include "sprites/sprite.h"
-
-#include "entities/entity.h"
-#include "entities/entity_manager.h"
-
-#include "components/input_component.h"
-#include "components/renderable_component.h"
-#include "components/renderable_rect_component.h"
-#include "components/physics_component.h"
-#include "components/elsa_ai_component.h"
-#include "components/leash_component.h"
-
-using namespace elsa;
-
-auto const SCREEN_WIDTH = 1080;
-auto const SCREEN_HEIGHT = 720;
-
-void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer)
-{
-    // Player
-    auto player = em.create_entity();
-    player->transform.position.x = SCREEN_WIDTH / 2;
-    player->transform.position.y = SCREEN_HEIGHT / 2 + 200;
-
-    player->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(255, 0, 0), 50, 50);
-    player->add_component<components::PhysicsComponent>(math::Vector2D(0, 150.f), 50, 50);
-    player->add_component<components::InputComponent>();
-
-    // Elsa
-    //auto elsa = em.create_entity();
-    //elsa->transform.position.x = SCREEN_WIDTH / 2;
-    //elsa->transform.position.y = SCREEN_HEIGHT / 2 - 200;
-    //
-    //elsa->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(0, 255, 0), 50, 50);
-    //elsa->add_component<components::PhysicsComponent>(math::Vector2D(0, 0));
-    //elsa->add_component<components::ElsaAiComponent>(SCREEN_WIDTH - 100, 100, SCREEN_HEIGHT, 0);
-    //elsa->add_component<components::LeashComponent>(renderer, player, rendering::Color::create(0, 0, 255));
-}
+#include "game.h"
 
 int main(int argc, char* args[])
 {
@@ -66,74 +19,9 @@ int main(int argc, char* args[])
         return 1;
     }
 
-    try
-    {
-        auto w = rendering::Window::create("Elsa!", SCREEN_WIDTH, SCREEN_HEIGHT);
-        auto r = rendering::Renderer2D::create(w.get(), false);
-
-        //auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/background.json", r.get());
-        auto bg_tile_map = loaders::TiledLoader::load_from_json("assets/tilesets/platformer_bg.json", r.get());
-
-        // Test sprite
-        auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/alien_beige.png", r.get());
-        auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.25f);
-        test_sprite.add_frame(0, 294, 68, 93);
-        test_sprite.add_frame(0, 100, 70, 96);
-
-        auto em = entities::EntityManager();
-        setup_entities(em, r.get());
-        em.init();
-
-        auto timer = timing::Timer();
-        const auto max_dt = 0.032f;
-        auto dt = 0.016f;
-        auto running = true;
-        input::InputManager::register_callback(input::InputEvent::Quit, [&running]()
-        {
-            std::cout << "input::InputEvent::Quit" << std::endl;
-            running = false;
-        });
-
-        timer.start();
-        auto num_frames = 0;
-
-        while (running)
-        {
-            input::InputManager::handle_input();
-
-            r->set_draw_color(rendering::Color::create(0, 0, 0));
-            r->clear();
-
-            // Test
-
-            bg_tile_map->render(r.get());
-            test_sprite.update(dt);
-            test_sprite.render(r.get(), 50, 50);
-
-            // Test
-
-            em.frame(dt);
-
-            r->present();
-
-            dt = (timer.get_ticks_since_last_call() / 1000.f);
-            if (dt > max_dt)
-            {
-                dt = max_dt;
-            }
-
-            if (num_frames % 10000 == 0)
-            {
-                std::cout << "dt: " << dt << std::endl;
-            }
-
-            num_frames++;
-        }
-    }
-    catch (const errors::ElsaException& ex)
-    {
-        std::cout << "Error:" << std::endl << ex.what() << std::endl;
-    }
+    auto game = std::make_unique<elsa::Game>();
+    game->init();
+    game->run();
 
     SDL_Quit();
 
