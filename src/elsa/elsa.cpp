@@ -37,7 +37,7 @@ void setup_entities(entities::EntityManager& em, rendering::Renderer2D* renderer
     player->transform.position.y = SCREEN_HEIGHT / 2 + 200;
 
     player->add_component<components::RenderableRectComponent>(renderer, rendering::Color::create(255, 0, 0), 50, 50);
-    player->add_component<components::PhysicsComponent>(math::Vector2D(0, 150.f));
+    player->add_component<components::PhysicsComponent>(math::Vector2D(0, 150.f), 50, 50);
     player->add_component<components::InputComponent>();
 
     // Elsa
