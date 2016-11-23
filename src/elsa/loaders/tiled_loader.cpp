@@ -106,8 +106,8 @@ namespace elsa {
                     auto src_row = static_cast<std::size_t>(std::floor(tile_index / tile_set.columns));
                     auto src_tile_coordinates = tiles::TileMap::get_tile_coordinates(src_column, src_row, tile_map->tile_width, tile_map->tile_height);
 
-                    tile.x = src_tile_coordinates.x + tile_set.spacing * src_column;
-                    tile.y = src_tile_coordinates.y + tile_set.spacing * src_row;
+                    tile.src_x = src_tile_coordinates.x + tile_set.spacing * src_column;
+                    tile.src_y = src_tile_coordinates.y + tile_set.spacing * src_row;
                     tile.index = tile_index;
 
                     if (tile.has_tile)
@@ -136,6 +136,8 @@ namespace elsa {
 
             // The only supported "format" right now
             assert(tile_map->render_order == "right-down");
+
+            tile_map->init_tile_dest_coordinates();
 
             return std::move(tile_map);
         }

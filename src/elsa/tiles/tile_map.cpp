@@ -7,6 +7,14 @@
 namespace elsa {
     namespace tiles {
 
+        void TileMap::init_tile_dest_coordinates()
+        {
+            for (std::size_t layer_index{ 0 }; layer_index < layers.size(); layer_index++)
+            {
+                init_tile_dest_coordinates_layer(layer_index);
+            }
+        }
+
         void TileMap::render(rendering::Renderer2D* renderer) const
         {
             for (std::size_t layer_index{ 0 }; layer_index < layers.size(); layer_index++)
@@ -24,6 +32,24 @@ namespace elsa {
         {
             const auto& tile_layer = layers[layer_index];
             const auto& tile_set = tile_sets[0];
+
+            for (std::size_t column = 0; column < tile_layer.width; column++)
+            {
+                for (std::size_t row = 0; row < tile_layer.height; row++)
+                {
+                    const auto& tile = tile_layer.tiles[row][column];
+                    if (tile.has_tile)
+                    {
+                        renderer->render_texture(tile_set.texture.get(), tile.dest_x, tile.dest_y, tile.src_x, tile.src_y, tile_width, tile_height);
+                    }
+                }
+            }
+        }
+
+        void TileMap::init_tile_dest_coordinates_layer(std::size_t layer_index)
+        {
+            auto& tile_layer = layers[layer_index];
+            const auto& tile_set = tile_sets[0];
             auto tile_height = tile_set.tile_height;
             auto tile_width = tile_set.tile_width;
 
@@ -31,11 +57,12 @@ namespace elsa {
             {
                 for (std::size_t row = 0; row < tile_layer.height; row++)
                 {
-                    auto tile = tile_layer.tiles[row][column];
+                    auto& tile = tile_layer.tiles[row][column];
                     if (tile.has_tile)
                     {
                         auto dest_coordinates = get_tile_coordinates(column, row, tile_set.tile_width, tile_set.tile_height);
-                        renderer->render_texture(tile_set.texture.get(), dest_coordinates.x, dest_coordinates.y, tile.x, tile.y, tile_width, tile_height);
+                        tile.dest_x = dest_coordinates.x;
+                        tile.dest_y = dest_coordinates.y;
                     }
                 }
             }

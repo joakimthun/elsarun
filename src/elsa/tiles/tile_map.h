@@ -23,8 +23,10 @@ namespace elsa {
 
         struct Tile
         {
-            u32 x;
-            u32 y;
+            u32 src_x;
+            u32 src_y;
+            u32 dest_x;
+            u32 dest_y;
             u32 index;
             bool has_tile;
             bool collidable;
@@ -70,6 +72,7 @@ namespace elsa {
         class TileMap
         {
         public:
+            void init_tile_dest_coordinates();
             void render(rendering::Renderer2D* renderer) const;
             static TileCoordinates get_tile_coordinates(std::size_t column, std::size_t row, u32 tile_width, u32 tile_height);
 
@@ -85,6 +88,7 @@ namespace elsa {
             u32 width;
         private:
             void render_layer(rendering::Renderer2D* renderer, std::size_t layer_index) const;
+            void init_tile_dest_coordinates_layer(std::size_t layer_index);
         };
     }
 }
