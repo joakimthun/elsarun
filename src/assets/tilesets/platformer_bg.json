@@ -38,6 +38,44 @@
          "spacing":2,
          "tilecount":156,
          "tileheight":70,
+         "tileproperties":
+            {
+             "103":
+                {
+                 "collidable":true
+                },
+             "128":
+                {
+                 "collidable":true
+                },
+             "144":
+                {
+                 "collidable":true
+                },
+             "32":
+                {
+                 "collidable":true
+                }
+            },
+         "tilepropertytypes":
+            {
+             "103":
+                {
+                 "collidable":"bool"
+                },
+             "128":
+                {
+                 "collidable":"bool"
+                },
+             "144":
+                {
+                 "collidable":"bool"
+                },
+             "32":
+                {
+                 "collidable":"bool"
+                }
+            },
          "tilewidth":70
         }],
  "tilewidth":70,

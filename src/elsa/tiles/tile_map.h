@@ -27,6 +27,7 @@ namespace elsa {
             u32 y;
             u32 index;
             bool has_tile;
+            bool collidable;
         };
 
         struct TileLayer

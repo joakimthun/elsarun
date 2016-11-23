@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <assert.h>
+#include <algorithm>
 
 #include "../errors/elsa_exception.h"
 #include "../rendering/renderer2d.h"
@@ -109,6 +110,18 @@ namespace elsa {
                     tile.y = src_tile_coordinates.y + tile_set.spacing * src_row;
                     tile.index = tile_index;
 
+                    if (tile.has_tile)
+                    {
+                        auto tile_property = std::find_if(tile_set.tile_properties.begin(), tile_set.tile_properties.end(), [&tile_index](const tiles::TileProperty& p)
+                        {
+                            return p.tile_id == tile_index;
+                        });
+
+                        if (tile_property != tile_set.tile_properties.end())
+                        {
+                            tile.collidable = tile_property->collidable;
+                        }
+                    }
 
                     layer.tiles[row].push_back(tile);
                     column++;
