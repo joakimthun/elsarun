@@ -38,12 +38,6 @@ namespace elsa {
             //tile_map_ = loaders::TiledLoader::load_from_json("assets/tilesets/background.json", renderer_.get());
             tile_map_ = loaders::TiledLoader::load_from_json("assets/tilesets/platformer_bg.json", renderer_.get());
 
-            // Test sprite
-            //auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/alien_beige.png", renderer_.get());
-            //auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.25f);
-            //test_sprite.add_frame(0, 294, 68, 93);
-            //test_sprite.add_frame(0, 100, 70, 96);
-
             entity_manager_ = std::make_unique<entities::EntityManager>();
             setup_entities();
             entity_manager_->init();
@@ -71,6 +65,12 @@ namespace elsa {
         timer_->start();
         auto num_frames = 0;
 
+        // Test sprite
+        auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/alien_beige.png", renderer_.get());
+        auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.25f);
+        test_sprite.add_frame(0, 294, 68, 93);
+        test_sprite.add_frame(0, 100, 70, 96);
+
         while (running)
         {
             input::InputManager::handle_input();
@@ -81,8 +81,8 @@ namespace elsa {
             // Test
 
             tile_map_->render(renderer_.get());
-            //test_sprite.update(dt);
-            //test_sprite.render(r.get(), 50, 50);
+            test_sprite.update(dt);
+            test_sprite.render(renderer_.get(), 50, 50);
 
             // Test
 
