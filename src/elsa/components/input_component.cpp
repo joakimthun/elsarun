@@ -19,29 +19,13 @@ namespace elsa {
             input::InputManager::register_callback(input::InputEvent::Right_Up, [this]() { set_state_up(Key::Right); });
             input::InputManager::register_callback(input::InputEvent::Right_Down, [this]() { set_state_down(Key::Right); });
             
-            //input::InputManager::register_callback(input::InputEvent::Up_Up, [this]() { set_state_up(Key::Up); });
-            input::InputManager::register_callback(input::InputEvent::Up_Down, [this]() { jump(); });
+            input::InputManager::register_callback(input::InputEvent::Up_Down, std::bind(&InputComponent::jump, this));
             input::InputManager::register_callback(input::InputEvent::Down_Up, [this]() { set_state_up(Key::Down); });
             input::InputManager::register_callback(input::InputEvent::Down_Down, [this]() { set_state_down(Key::Down); });
         }
 
         void InputComponent::update(float dt)
         {
-            //if (is_down(Key::Up))
-            //{
-            //    physics_component_->velocity_goal.y = -VELOCITY;
-            //}
-            //else if (is_down(Key::Down))
-            //{
-            //    physics_component_->velocity_goal.y = VELOCITY;
-            //}
-            //else
-            //{
-            //    physics_component_->velocity_goal.y = 0;
-            //}
-
-
-
             if (is_down(Key::Left))
             {
                 physics_component_->velocity_goal.x = -VELOCITY;
