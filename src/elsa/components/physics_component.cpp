@@ -9,7 +9,7 @@
 namespace elsa {
     namespace components {
 
-        PhysicsComponent::PhysicsComponent(math::Vector2D& gravity, u32 width, u32 height)
+        PhysicsComponent::PhysicsComponent(const math::Vector2D& gravity, u32 width, u32 height)
             :
             gravity(gravity),
             body(std::make_unique<physics::AABB>(0, 0, width, height))
@@ -23,7 +23,7 @@ namespace elsa {
 
         void PhysicsComponent::update(float dt)
         {
-            velocity.lerp(velocity_goal, dt * 500);
+            velocity.lerp(velocity_goal, dt * 1000);
 
             auto old_position = entity->transform.position;
 

@@ -21,6 +21,7 @@
 
 auto const SCREEN_WIDTH = 1080;
 auto const SCREEN_HEIGHT = 720;
+auto const GRAVITY = elsa::math::Vector2D(0, 700.f);
 
 namespace elsa {
 
@@ -112,7 +113,7 @@ namespace elsa {
         player->transform.position.x = SCREEN_WIDTH / 2;
         player->transform.position.y = SCREEN_HEIGHT / 2;
 
-        player->add_component<components::PhysicsComponent>(math::Vector2D(0, 150.f), 50, 50);
+        player->add_component<components::PhysicsComponent>(GRAVITY, 50, 50);
         player->add_component<components::RenderableRectComponent>(renderer_.get(), rendering::Color::create(0, 0, 255), 50, 50, true);
         player->add_component<components::InputComponent>();
 

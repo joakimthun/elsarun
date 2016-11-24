@@ -11,7 +11,7 @@ namespace elsa {
 
         struct PhysicsComponent : Component
         {
-            PhysicsComponent(math::Vector2D& gravity, u32 width, u32 height);
+            PhysicsComponent(const math::Vector2D& gravity, u32 width, u32 height);
 
             void init() override;
             void update(float dt) override;

@@ -19,6 +19,13 @@ namespace elsa {
             MAX_VALUE
         };
 
+        enum class JumpingState : u8
+        {
+            Gounded,
+            Jumping,
+            DoubleJumping
+        };
+
         inline std::size_t constexpr max_num_keys()
         {
             return static_cast<std::size_t>(Key::MAX_VALUE);
@@ -39,7 +46,7 @@ namespace elsa {
 
             PhysicsComponent* physics_component_ = nullptr;
             std::array<bool, max_num_keys()> key_states_ = { false };
-            bool jumping_ = false;
+            JumpingState jumping_state_ = JumpingState::Gounded;
         };
 
     }

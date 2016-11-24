@@ -7,8 +7,8 @@
 namespace elsa {
     namespace components {
 
-        const float VELOCITY = 300;
-        const float JUMP_VELOCITY = 800;
+        const float VELOCITY = 500;
+        const float JUMP_VELOCITY = 1200;
 
         void InputComponent::init()
         {
@@ -44,15 +44,20 @@ namespace elsa {
         {
             if (event == entities::EntityEvent::OnTheGround)
             {
-                jumping_ = false;
+                jumping_state_ = JumpingState::Gounded;
             }
         }
 
         void InputComponent::jump()
         {
-            if (!jumping_)
+            if (jumping_state_ == JumpingState::Gounded)
             {
-                jumping_ = true;
+                jumping_state_ = JumpingState::Jumping;
+                physics_component_->velocity.y = -JUMP_VELOCITY;
+            }
+            else if (jumping_state_ == JumpingState::Jumping)
+            {
+                jumping_state_ = JumpingState::DoubleJumping;
                 physics_component_->velocity.y = -JUMP_VELOCITY;
             }
         }
