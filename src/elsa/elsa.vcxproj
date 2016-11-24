@@ -189,6 +189,7 @@
     <ClInclude Include="components\renderable_component.h" />
     <ClInclude Include="components\renderable_rect_component.h" />
     <ClInclude Include="components\transform_component.h" />
+    <ClInclude Include="entities\entity_events.h" />
     <ClInclude Include="entities\entity_manager.h" />
     <ClInclude Include="entities\entity.h" />
     <ClInclude Include="errors\elsa_exception.h" />

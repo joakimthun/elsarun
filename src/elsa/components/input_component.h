@@ -28,6 +28,8 @@ namespace elsa {
         {
             void init() override;
             void update(float dt) override;
+            void listen(entities::EntityEvent event) override;
+            void jump();
             ComponentType type() override;
 
         private:
@@ -37,6 +39,7 @@ namespace elsa {
 
             PhysicsComponent* physics_component_ = nullptr;
             std::array<bool, max_num_keys()> key_states_ = { false };
+            bool jumping_ = false;
         };
 
     }

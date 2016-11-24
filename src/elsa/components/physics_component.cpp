@@ -1,5 +1,7 @@
 #include "physics_component.h"
 
+#include <iostream>
+
 #include "../entities/entity.h"
 #include "../entities/entity_manager.h"
 #include "transform_component.h"
@@ -45,6 +47,11 @@ namespace elsa {
             {
                 reset_body(old_position);
                 entity->transform.position.y = old_position.y;
+
+                if (velocity.y >= 0)
+                {
+                    entity->emit(entities::EntityEvent::OnTheGround);
+                }
             }
         }
 

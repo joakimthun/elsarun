@@ -5,6 +5,7 @@
 #include <memory>
 #include <bitset>
 
+#include "entity_events.h"
 #include "../components/component.h"
 #include "../components/transform_component.h"
 
@@ -64,6 +65,14 @@ namespace elsa {
                 {
                     c->update(dt);
                     c->render();
+                }
+            };
+
+            inline void emit(EntityEvent event)
+            {
+                for (auto c : added_components_)
+                {
+                    c->listen(event);
                 }
             };
 
