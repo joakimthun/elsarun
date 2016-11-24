@@ -21,7 +21,7 @@ namespace elsa {
 
         void PhysicsComponent::update(float dt)
         {
-            velocity.lerp(velocity_goal, dt * 100);
+            velocity.lerp(velocity_goal, dt * 500);
 
             auto old_position = entity->transform.position;
 
@@ -35,7 +35,6 @@ namespace elsa {
             {
                 reset_body(old_position);
                 entity->transform.position.x = old_position.x;
-                //velocity.x = 0;
             }
 
             // Y
@@ -46,7 +45,6 @@ namespace elsa {
             {
                 reset_body(old_position);
                 entity->transform.position.y = old_position.y;
-                //velocity.y = 0;
             }
         }
 
