@@ -67,10 +67,33 @@ namespace elsa {
         auto num_frames = 0;
 
         // Test sprite
-        auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/alien_beige.png", renderer_.get());
-        auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.25f);
-        test_sprite.add_frame(0, 294, 68, 93);
-        test_sprite.add_frame(0, 100, 70, 96);
+        //auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/alien_beige.png", renderer_.get());
+        //auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.25f);
+        //test_sprite.add_frame(0, 294, 68, 93);
+        //test_sprite.add_frame(0, 100, 70, 96);
+
+        auto test_sprite_texture = rendering::Texture::load_from_file("assets/sprites/dog.png", renderer_.get());
+        auto test_sprite = sprites::Sprite(std::move(test_sprite_texture), 0.016f);
+
+        auto s_height = 129;
+        test_sprite.add_frame(0, 0, 245, s_height);
+        test_sprite.add_frame(0, s_height * 1, 245, s_height);
+        test_sprite.add_frame(0, s_height * 2, 245, s_height);
+        test_sprite.add_frame(0, s_height * 3, 245, s_height);
+        test_sprite.add_frame(0, s_height * 4, 245, s_height);
+        test_sprite.add_frame(0, s_height * 5, 245, s_height);
+        test_sprite.add_frame(0, s_height * 6, 245, s_height);
+        test_sprite.add_frame(0, s_height * 7, 245, s_height);
+        test_sprite.add_frame(0, s_height * 8, 245, s_height);
+        test_sprite.add_frame(0, s_height * 9, 245, s_height);
+        test_sprite.add_frame(0, s_height * 10, 245, s_height);
+        test_sprite.add_frame(0, s_height * 11, 245, s_height);
+        test_sprite.add_frame(0, s_height * 12, 245, s_height);
+        test_sprite.add_frame(0, s_height * 13, 245, s_height);
+        test_sprite.add_frame(0, s_height * 14, 245, s_height);
+        test_sprite.add_frame(0, s_height * 15, 245, s_height);
+        test_sprite.add_frame(0, s_height * 16, 245, s_height);
+        test_sprite.add_frame(0, s_height * 17, 245, s_height);
 
         while (running)
         {
