@@ -12,12 +12,7 @@ namespace elsa {
         {
         }
 
-        bool AABB::intersects(const AABB& other)
-        {
-            return intersects(other, AABB(0, 0, 0, 0));
-        }
-
-        bool AABB::intersects(const AABB& other, AABB& result)
+        bool AABB::intersects(const AABB& other) const
         {
             u32 amin, amax, bmin, bmax;
 
@@ -32,13 +27,15 @@ namespace elsa {
                 amin = bmin;
             }
 
-            result.x = amin;
             if (bmax < amax)
             {
                 amax = bmax;
             }
 
-            result.width = amax - amin;
+            if (amax <= amin)
+            {
+                return false;
+            }
 
             // Vertical intersection
             amin = y;
@@ -51,20 +48,17 @@ namespace elsa {
                 amin = bmin;
             }
 
-            result.y = amin;
             if (bmax < amax)
             {
                 amax = bmax;
             }
 
-            result.height = amax - amin;
+            if (amax <= amin)
+            {
+                return false;
+            }
 
-            return !result.is_empty();
-        }
-
-        bool AABB::is_empty()
-        {
-            return ((width <= 0) || (height <= 0));
+            return true;
         }
 
     }

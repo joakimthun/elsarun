@@ -10,6 +10,7 @@ namespace elsa {
             Vector2D();
             Vector2D(float x, float y);
 
+            Vector2D operator+(const Vector2D& v2);
             Vector2D operator+=(const Vector2D& v2);
             Vector2D operator-(const Vector2D& v2) const;
             Vector2D operator-=(const Vector2D& v2);

@@ -11,6 +11,8 @@
 namespace elsa {
     namespace entities {
 
+        class EntityManager;
+
         inline std::size_t constexpr get_component_type_index(components::ComponentType component_type)
         {
             return static_cast<std::size_t>(component_type);
@@ -25,7 +27,7 @@ namespace elsa {
             }
 
             template<typename TComponent>
-            inline TComponent* get_component(components::ComponentType component_type)
+            inline TComponent* get_component(components::ComponentType component_type) const
             {
                 static_assert(std::is_base_of<components::Component, TComponent>::value, "TComponent must inherit from Component");
 
@@ -66,6 +68,7 @@ namespace elsa {
             };
 
             components::TransformComponent transform;
+            EntityManager* entity_manager_;
         private:
             std::bitset<components::max_num_component_types()> component_flags_;
             std::array<std::unique_ptr<components::Component>, components::max_num_component_types()> components_;

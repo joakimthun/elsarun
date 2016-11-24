@@ -75,7 +75,7 @@ namespace elsa {
         {
         public:
             void init();
-            void render(rendering::Renderer2D* renderer) const;
+            void render(rendering::Renderer2D* renderer, bool render_bodies) const;
             static TileCoordinates get_tile_coordinates(std::size_t column, std::size_t row, u32 tile_width, u32 tile_height);
 
             u32 height;
@@ -89,7 +89,7 @@ namespace elsa {
             i32 version;
             u32 width;
         private:
-            void render_layer(rendering::Renderer2D* renderer, std::size_t layer_index) const;
+            void render_layer(rendering::Renderer2D* renderer, std::size_t layer_index, bool render_bodies) const;
             void init_layer(std::size_t layer_index);
         };
     }

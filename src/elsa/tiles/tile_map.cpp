@@ -15,11 +15,11 @@ namespace elsa {
             }
         }
 
-        void TileMap::render(rendering::Renderer2D* renderer) const
+        void TileMap::render(rendering::Renderer2D* renderer, bool render_bodies) const
         {
             for (std::size_t layer_index{ 0 }; layer_index < layers.size(); layer_index++)
             {
-                render_layer(renderer, layer_index);
+                render_layer(renderer, layer_index, render_bodies);
             }
         }
 
@@ -28,7 +28,7 @@ namespace elsa {
             return TileCoordinates{ column * tile_width, row * tile_height };
         }
 
-        void TileMap::render_layer(rendering::Renderer2D* renderer, std::size_t layer_index) const
+        void TileMap::render_layer(rendering::Renderer2D* renderer, std::size_t layer_index, bool render_bodies) const
         {
             const auto& tile_layer = layers[layer_index];
             const auto& tile_set = tile_sets[0];
@@ -44,6 +44,15 @@ namespace elsa {
                     }
                 }
             }
+
+            if (render_bodies)
+            {
+                for (const auto& body : tile_layer.collidable_tiles)
+                {
+                    renderer->set_draw_color(rendering::Color::create(255, 0, 0));
+                    renderer->draw_rect(body.x, body.y, body.width, body.height);
+                }
+            }
         }
 
         void TileMap::init_layer(std::size_t layer_index)
@@ -52,6 +61,8 @@ namespace elsa {
 
             auto& tile_layer = layers[layer_index];
             const auto& tile_set = tile_sets[0];
+            auto tile_width = tile_set.tile_width;
+            auto tile_height = tile_set.tile_height;
 
             for (std::size_t column = 0; column < tile_layer.width; column++)
             {
@@ -60,13 +71,13 @@ namespace elsa {
                     auto& tile = tile_layer.tiles[row][column];
                     if (tile.has_tile)
                     {
-                        auto dest_coordinates = get_tile_coordinates(column, row, tile_set.tile_width, tile_set.tile_height);
+                        auto dest_coordinates = get_tile_coordinates(column, row, tile_width, tile_height);
                         tile.dest_x = dest_coordinates.x;
                         tile.dest_y = dest_coordinates.y;
 
                         if (tile.collidable)
                         {
-                            tile_layer.collidable_tiles.push_back(physics::AABB(tile.dest_x, tile.dest_y, tile_set.tile_width, tile_set.tile_height));
+                            tile_layer.collidable_tiles.push_back(physics::AABB(tile.dest_x, tile.dest_y, tile_width, tile_height));
                         }
                     }
                 }

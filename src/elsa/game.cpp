@@ -38,7 +38,7 @@ namespace elsa {
             //tile_map_ = loaders::TiledLoader::load_from_json("assets/tilesets/background.json", renderer_.get());
             tile_map_ = loaders::TiledLoader::load_from_json("assets/tilesets/platformer_bg.json", renderer_.get());
 
-            entity_manager_ = std::make_unique<entities::EntityManager>();
+            entity_manager_ = std::make_unique<entities::EntityManager>(tile_map_.get());
             setup_entities();
             entity_manager_->init();
 
@@ -80,7 +80,7 @@ namespace elsa {
 
             // Test
 
-            tile_map_->render(renderer_.get());
+            tile_map_->render(renderer_.get(), true);
             test_sprite.update(dt);
             test_sprite.render(renderer_.get(), 50, 50);
 
@@ -110,10 +110,10 @@ namespace elsa {
         // Player
         auto player = entity_manager_->create_entity();
         player->transform.position.x = SCREEN_WIDTH / 2;
-        player->transform.position.y = SCREEN_HEIGHT / 2 + 200;
+        player->transform.position.y = SCREEN_HEIGHT / 2;
 
-        player->add_component<components::RenderableRectComponent>(renderer_.get(), rendering::Color::create(255, 0, 0), 50, 50);
         player->add_component<components::PhysicsComponent>(math::Vector2D(0, 150.f), 50, 50);
+        player->add_component<components::RenderableRectComponent>(renderer_.get(), rendering::Color::create(0, 0, 255), 50, 50, true);
         player->add_component<components::InputComponent>();
 
         // Elsa

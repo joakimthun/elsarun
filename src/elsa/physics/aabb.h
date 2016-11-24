@@ -9,9 +9,7 @@ namespace elsa {
         {
             AABB(u32 x, u32 y, u32 width, u32 height);
 
-            bool intersects(const AABB& other);
-            bool intersects(const AABB& other, AABB& result);
-            bool is_empty();
+            bool intersects(const AABB& other) const;
 
             u32 x;
             u32 y;

@@ -23,6 +23,7 @@ namespace elsa {
             std::unique_ptr<physics::AABB> body;
 
         private:
+            void reset_body(const math::Vector2D& old_position);
             void update_body();
         };
 

@@ -73,12 +73,24 @@ namespace elsa {
         {
             SDL_Rect rectangle;
 
-            rectangle.x = x - width / 2;
-            rectangle.y = y - height / 2;
+            rectangle.x = x;
+            rectangle.y = y;
             rectangle.w = width;
             rectangle.h = height;
 
             SDL_RenderFillRect(renderer_, &rectangle);
+        }
+
+        void Renderer2D::draw_rect(i32 x, i32 y, i32 width, i32 height)
+        {
+            SDL_Rect rectangle;
+
+            rectangle.x = x;
+            rectangle.y = y;
+            rectangle.w = width;
+            rectangle.h = height;
+
+            SDL_RenderDrawRect(renderer_, &rectangle);
         }
 
         void Renderer2D::render_line(i32 x1, i32 y1, i32 x2, i32 y2)

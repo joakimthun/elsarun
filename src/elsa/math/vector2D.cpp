@@ -11,6 +11,11 @@ namespace elsa {
 
         Vector2D::Vector2D(float x, float y) : x(x), y(y) {}
 
+        Vector2D Vector2D::operator+(const Vector2D & v2)
+        {
+            return Vector2D(x + v2.x, y + v2.y);
+        }
+
         Vector2D Vector2D::operator+=(const Vector2D& v2)
         {
             x += v2.x;
