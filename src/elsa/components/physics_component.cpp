@@ -24,13 +24,12 @@ namespace elsa {
         void PhysicsComponent::update(float dt)
         {
             velocity.lerp(velocity_goal, dt * 1000);
+            velocity += gravity;
 
             auto old_position = entity->transform.position;
 
-            auto update_vector = velocity + gravity;
-
             // X
-            entity->transform.position.x += (update_vector.x * dt);
+            entity->transform.position.x += (velocity.x * dt);
             update_body();
 
             if (entity->entity_manager_->resolve_collisions(*body))
@@ -40,7 +39,7 @@ namespace elsa {
             }
 
             // Y
-            entity->transform.position.y += (update_vector.y * dt);
+            entity->transform.position.y += (velocity.y * dt);
             update_body();
 
             if (entity->entity_manager_->resolve_collisions(*body))

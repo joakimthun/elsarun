@@ -55,6 +55,18 @@
              "32":
                 {
                  "collidable":true
+                },
+             "44":
+                {
+                 "collidable":true
+                },
+             "56":
+                {
+                 "collidable":true
+                },
+             "68":
+                {
+                 "collidable":true
                 }
             },
          "tilepropertytypes":
@@ -72,6 +84,18 @@
                  "collidable":"bool"
                 },
              "32":
+                {
+                 "collidable":"bool"
+                },
+             "44":
+                {
+                 "collidable":"bool"
+                },
+             "56":
+                {
+                 "collidable":"bool"
+                },
+             "68":
                 {
                  "collidable":"bool"
                 }

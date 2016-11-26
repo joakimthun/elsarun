@@ -21,7 +21,7 @@
 
 auto const SCREEN_WIDTH = 1080;
 auto const SCREEN_HEIGHT = 720;
-auto const GRAVITY = elsa::math::Vector2D(0, 700.f);
+auto const GRAVITY = elsa::math::Vector2D(0, 1.f);
 
 namespace elsa {
 
