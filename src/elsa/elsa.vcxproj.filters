@@ -75,6 +75,9 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="components\sprite_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\vector2D.h">
@@ -159,6 +162,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entities\entity_events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\sprite_component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

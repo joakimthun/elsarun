@@ -164,6 +164,7 @@
     <ClCompile Include="components\physics_component.cpp" />
     <ClCompile Include="components\renderable_component.cpp" />
     <ClCompile Include="components\renderable_rect_component.cpp" />
+    <ClCompile Include="components\sprite_component.cpp" />
     <ClCompile Include="entities\entity_manager.cpp" />
     <ClCompile Include="elsa.cpp" />
     <ClCompile Include="errors\elsa_exception.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="components\physics_component.h" />
     <ClInclude Include="components\renderable_component.h" />
     <ClInclude Include="components\renderable_rect_component.h" />
+    <ClInclude Include="components\sprite_component.h" />
     <ClInclude Include="components\transform_component.h" />
     <ClInclude Include="entities\entity_events.h" />
     <ClInclude Include="entities\entity_manager.h" />
